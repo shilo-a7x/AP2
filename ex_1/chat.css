@@ -33,7 +33,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #fd8a8a;
+    background-color: #112e4f;
     padding: 4px;
     border-radius: 10px 0 0 10px;
 }
@@ -50,6 +50,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    color: aliceblue;
 }
 
 .profile img {
@@ -88,7 +89,7 @@ body {
 }
 
 #dror {
-    background-color: #0073e6;
+    background-color: #ccc;
 }
 
 .contact img {
@@ -106,7 +107,7 @@ body {
 
 .last-message {
     font-size: 14px;
-    color: #ff00b3;
+    color: #236c25;
     margin-top: 5px;
     margin-left: 20px;
     float: right;
@@ -124,25 +125,10 @@ body {
     background-color: #dddddd;
 }
 
-.contact.active {
-    background-color: #ffff00;
-    color: #00ff66;
-}
-
-.contact.active .name,
-.contact.active .last-message,
-.contact.active .last-message-date {
-    color: #ff0000;
-}
-
-.contact.active:hover {
-    background-color: #ddff00;
-}
-
 .contact-list {
     overflow-y: scroll;
     height: calc(85vh - 100px);
-    background-color: #00d5ff;
+    background-color: #eee;
     border-radius: 4px;
 }
 
@@ -151,12 +137,12 @@ body {
 }
 
 .contact-list::-webkit-scrollbar-thumb {
-    background-color: #5eea65;
+    background-color: #5e83ae;
 
 }
 
 .contact-list::-webkit-scrollbar-track {
-    background-color: #aaaaaa;
+    background-color: #b5d3ea;
 }
 
 .contact-info {
@@ -164,7 +150,7 @@ body {
     align-items: center;
     padding: 17px;
     border-bottom: 1px solid #ddd;
-    background-color: #3300ff;
+    background-color: aliceblue;
     border-radius: 0 10px 0 0;
 }
 
@@ -185,11 +171,11 @@ body {
 }
 
 .chat::-webkit-scrollbar-thumb {
-    background-color: #cd7575;
+    background-color: #5e83ae;
 }
 
 .chat::-webkit-scrollbar-track {
-    background-color: #3980aa;
+    background-color: #b5d3ea;
 }
 
 .message {
@@ -207,33 +193,34 @@ body {
     padding-right: 8px;
 }
 
-.message.received {
+.message.sent {
     align-items: flex-start;
 }
 
-.message.sent {
+.message.received {
     align-items: flex-end;
     margin-left: auto;
 }
 
-.message.received .text {
-    background-color: #baddad;
+.message.sent .text {
+    color: aliceblue;
+    background-color: #0084ff;
     border-radius: 8px 8px 8px 0;
 }
 
-.message.sent .text {
-    background-color: #ff9500;
-    color: #fff;
+.message.received .text {
+    background-color: #ddd;
+    color: #000;
     margin-left: auto;
     border-radius: 8px 8px 0 8px;
 }
 
-.message.received .date {
+.message.sent .date {
     text-align: left;
     text-size-adjust: 14px;
 }
 
-.sent-text {
+.received-text {
     background-color: #DCF8C6;
     /* example background color */
     padding: 10px;
@@ -244,7 +231,7 @@ body {
     /* to make the div only as wide as the content */
 }
 
-.sent-time {
+.received-time {
     font-size: 12px;
     /* example font size */
     color: #777;
@@ -253,7 +240,7 @@ body {
     /* example margin */
 }
 
-.message.sent .date {
+.message.received .date {
     text-align: right;
 }
 
