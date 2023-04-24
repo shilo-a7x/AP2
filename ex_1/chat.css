@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     background: linear-gradient(to bottom, #1e5799, #7db9e8);
-  }
-  
-  .Logout-button {
+}
+
+.Logout-button {
     background-color: #ff0000;
     color: #f6e8e8;
     float: right;
@@ -17,9 +17,9 @@
     border-radius: 8px;
     padding: 2px;
     margin-top: 5px;
-  }
-  
-  .container {
+}
+
+.container {
     display: flex;
     height: 87vh;
     margin-left: 350px;
@@ -27,45 +27,45 @@
     margin-top: 2vh;
     margin-bottom: 7.7vh;
     border-radius: 10px;
-  }
-  
-  .left-panel {
+}
+
+.left-panel {
     flex: 1;
     display: flex;
     flex-direction: column;
     background-color: #fd8a8a;
     padding: 4px;
     border-radius: 10px 0 0 10px;
-  }
-  
-  .right-panel {
+}
+
+.right-panel {
     flex: 3;
     background-color: #FFF2CC;
     display: flex;
     flex-direction: column;
     border-radius: 0 10px 10px 0;
-  }
-  
-  .profile {
+}
+
+.profile {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .profile img {
+}
+
+.profile img {
     width: 50px;
     height: 50px;
     border-radius: 50px;
     margin-right: 10px;
-  }
-  
-  .name {
+}
+
+.name {
     font-size: 20px;
     font-weight: bold;
-    
-  }
-  
-  .addContactButton {
+
+}
+
+.addContactButton {
     background-color: #00d5ff;
     color: #002b03;
     border: none;
@@ -75,165 +75,165 @@
     cursor: pointer;
     margin-left: 160px;
     width: 50px;
-  }
-  
-  .contact {
-  
+}
+
+.contact {
+
     display: flex;
     align-items: center;
     padding-top: 10px;
     padding-right: 3px;
     cursor: pointer;
     height: 80px;
-  }
-  
-  #dror {
+}
+
+#dror {
     background-color: #0073e6;
-  }
-  
-  .contact img {
+}
+
+.contact img {
     width: 50px;
     height: 45px;
     border-radius: 50px;
     padding-top: 5px;
-  }
-  
-  .contact .info {
+}
+
+.contact .info {
     margin-left: 10px;
     width: 400px;
-  }
-  
-  
-  .last-message {
+}
+
+
+.last-message {
     font-size: 14px;
     color: #ff00b3;
     margin-top: 5px;
     margin-left: 20px;
     float: right;
-  
-  }
-  
-  .last-message-date {
+
+}
+
+.last-message-date {
     font-size: 12px;
     color: #0e9cee;
     text-align: left;
-  }
-  
-  
-  .contact:hover {
+}
+
+
+.contact:hover {
     background-color: #dddddd;
-  }
-  
-  .contact.active {
+}
+
+.contact.active {
     background-color: #ffff00;
     color: #00ff66;
-  }
-  
-  .contact.active .name,
-  .contact.active .last-message,
-  .contact.active .last-message-date {
+}
+
+.contact.active .name,
+.contact.active .last-message,
+.contact.active .last-message-date {
     color: #ff0000;
-  }
-  
-  .contact.active:hover {
+}
+
+.contact.active:hover {
     background-color: #ddff00;
-  }
-  
-  .contact-list {
+}
+
+.contact-list {
     overflow-y: scroll;
     height: calc(85vh - 100px);
     background-color: #00d5ff;
     border-radius: 4px;
-  }
-  
-  .contact-list::-webkit-scrollbar {
+}
+
+.contact-list::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  .contact-list::-webkit-scrollbar-thumb {
+}
+
+.contact-list::-webkit-scrollbar-thumb {
     background-color: #5eea65;
-  
-  }
-  
-  .contact-list::-webkit-scrollbar-track {
+
+}
+
+.contact-list::-webkit-scrollbar-track {
     background-color: #aaaaaa;
-  }
-  
-  .contact-info {
+}
+
+.contact-info {
     display: flex;
     align-items: center;
     padding: 17px;
     border-bottom: 1px solid #ddd;
     background-color: #3300ff;
     border-radius: 0 10px 0 0;
-  }
-  
-  .contact-info img {
+}
+
+.contact-info img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
-  }
-  
-  .chat {
+}
+
+.chat {
     flex: 1;
     overflow-y: scroll;
-  }
-  
-  .chat::-webkit-scrollbar {
+}
+
+.chat::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  .chat::-webkit-scrollbar-thumb {
+}
+
+.chat::-webkit-scrollbar-thumb {
     background-color: #cd7575;
-  }
-  
-  .chat::-webkit-scrollbar-track {
+}
+
+.chat::-webkit-scrollbar-track {
     background-color: #3980aa;
-  }
-  
-  .message {
+}
+
+.message {
     display: flex;
     flex-direction: column;
     padding: 15px;
     margin: 10px;
     max-width: 70%;
     word-wrap: break-word;
-  }
-  
-  .message p {
+}
+
+.message p {
     margin: 5px;
     padding-left: 8px;
     padding-right: 8px;
-  }
-  
-  .message.received {
+}
+
+.message.received {
     align-items: flex-start;
-  }
-  
-  .message.sent {
+}
+
+.message.sent {
     align-items: flex-end;
     margin-left: auto;
-  }
-  
-  .message.received .text {
+}
+
+.message.received .text {
     background-color: #baddad;
     border-radius: 8px 8px 8px 0;
-  }
-  
-  .message.sent .text {
+}
+
+.message.sent .text {
     background-color: #ff9500;
     color: #fff;
     margin-left: auto;
-    border-radius: 8px 8px 0 8px ;
-  }
-  
-  .message.received .date {
+    border-radius: 8px 8px 0 8px;
+}
+
+.message.received .date {
     text-align: left;
     text-size-adjust: 14px;
-  }
-  
-  .sent-text {
+}
+
+.sent-text {
     background-color: #DCF8C6;
     /* example background color */
     padding: 10px;
@@ -242,35 +242,35 @@
     /* example border radius */
     display: inline-block;
     /* to make the div only as wide as the content */
-  }
-  
-  .sent-time {
+}
+
+.sent-time {
     font-size: 12px;
     /* example font size */
     color: #777;
     /* example color */
     margin-left: 10px;
     /* example margin */
-  }
-  
-  .message.sent .date {
+}
+
+.message.sent .date {
     text-align: right;
-  }
-  
-  .input-bar {
+}
+
+.input-bar {
     display: flex;
     align-items: center;
     padding: 10px;
-  }
-  
-  .input-bar input {
+}
+
+.input-bar input {
     flex: 1;
     border: none;
     padding: 10px;
     border-radius: 5px;
-  }
-  
-  .send-button {
+}
+
+.send-button {
     background-color: #0084ff;
     color: #fff;
     border: none;
@@ -278,8 +278,8 @@
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
-  }
-  
-  .send-button:hover {
+}
+
+.send-button:hover {
     background-color: #0073e6;
-  }
+}
