@@ -1,50 +1,50 @@
 body {
-  background: linear-gradient(to bottom, #1e5799, #7db9e8);
+    background: linear-gradient(to bottom, #1e5799, #7db9e8);
 }
 
 form {
-  background-color: aliceblue;
-  width: 400px;
-  margin: auto;
-  padding: 30px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-  margin-top: 50px;
-  margin-bottom: 50.2vh;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: aliceblue;
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+    margin-bottom: 50.2vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
+    display: block;
+    margin-bottom: 5px;
 }
 
 input[type="text"],
 input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
 }
 
 .login-btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  float: right;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
 }
 
 .login-btn:hover {
-  background-color: #3e8e41;
+    background-color: #3e8e41;
 }
 
 .register-form {
-  margin-bottom: 17.5vh;
+    margin-bottom: 17.5vh;
 }
