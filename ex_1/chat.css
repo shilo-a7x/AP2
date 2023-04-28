@@ -78,8 +78,15 @@ body {
     width: 50px;
 }
 
-.contact {
+.modal-title{
+    color: #000;
+}
 
+.modal-body{
+    color: #000;
+}
+
+.contact {
     display: flex;
     align-items: center;
     padding-top: 10px;
