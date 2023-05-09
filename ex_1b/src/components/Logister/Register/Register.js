@@ -1,21 +1,35 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
 
 
 Register = () => {
+
+    const usernameContainer = useRef(null);
+    const passwordContainer = useRef(null);
+    const confirmPasswordContainer = useRef(null);
+    const displayNameContainer = useRef(null);
+
+    const navigate = useNavigate();
+
+    const [usernameFieldValid, setUsernameFieldValid] = useState(false);
+    const [passwordFieldValid, setPasswordFieldValid] = useState(false);
+    const [passwordConfirmationFieldValid, setPasswordConfirmationFieldValid] = useState(false);
+    const [displayNameValid, setDisplayNameFieldValid] = useState(false);
+    const [typeInConfirmation, setTypeInConfirmation] = useState(false);
+
     return (<div>
         <form className="register-form" onSubmit={signedUp}>
             <label htmlFor="name">Username:</label>
-            <input ref={userNameContainer} type="text" id="name" className="form-control" name="name" required></input>
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" className="form-control" name="password" onChange={validateUsername} onKeyUp={enforceUsernameRegEx} onBlur={clearUsernameError}
+            <input ref={usernameContainer} type="text" id="name" className="form-control" name="name" onChange={validateUsername} onKeyUp={checkRegex} onFocus={deleteUsernameError}
                 maxLength="15" required></input>
+            <label htmlFor="password">Password:</label>
+            <input ref={passwordContainer} type="password" id="password" className="form-control" name="password" required></input>
             <label htmlFor="confirm-password">Confirm Password:</label>
-            <input type="password" className="form-control" id="confirm-password" name="confirm-password" required></input>
+            <input ref={confirmPasswordContainer} type="password" className="form-control" id="confirm-password" name="confirm-password" required></input>
             <label htmlFor="display-name">Display name:</label>
-            <input type="text" id="display-name" className="form-control" name="display-name" required></input>
+            <input ref={displayNameContainer} type="text" id="display-name" className="form-control" name="display-name" required></input>
             <label htmlFor="profile-pic">Upload Picture:</label>
             <div className="input-group">
                 <div className="custom-file">
