@@ -6,13 +6,13 @@ import Register from "./components/Logister/Register/Register.js";
 function App() {
   return (
     <Router>
-      <div className="App" data-theme={theme}>
+      <div className="App">
         <main>
           <Routes>
             <Route path='/register' element={
               // Render the Signup component.
               <>
-                <SignUpForm user={user} setUser={setUser} token={token} setToken={setToken} />
+                <Register />
               </>
             } />
           </Routes>
