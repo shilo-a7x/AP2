@@ -226,7 +226,7 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
             </div>
             <br></br>
             <p>Already registered? <Link to="/">Click here</Link> to login.</p>
-            <button type="submit" className="register-btn" id='register-btn'>Register</button>
+            <button type="submit" className="logister-btn" id='register-btn'>Register</button>
             <br></br><br></br>
         </form>
     </div>);

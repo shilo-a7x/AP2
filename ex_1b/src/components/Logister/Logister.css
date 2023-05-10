@@ -34,7 +34,7 @@ input[type="password"] {
     color: red;
 }
 
-.register-btn {
+.loregister-btn {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -45,7 +45,7 @@ input[type="password"] {
     float: right;
 }
 
-.register-btn:hover {
+.loregister-btn:hover {
     background-color: #3e8e41;
 }
 
