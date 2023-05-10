@@ -146,7 +146,9 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
         const displayName = displayNameContainer.current.value;
-        if (credentials[username]) {
+        console.log(username);
+        if (credentials[username.value]) {
+            console.log("hello if");
             document.getElementById("usernameError").innerHTML = "Username is already taken";
             document.getElementById("username").classList.add("is-invalid");
             document.getElementById("usernameLabel").classList.add("text-danger");
@@ -162,9 +164,10 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
             "contacts": [],
         };
         setUsers([...users, newUser]);
-        navigate("/");
         console.log("after");
         console.log(credentials);
+        console.log(users);
+        //navigate("/");
     }
 
     useEffect(() => {
@@ -173,7 +176,7 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
     }, [usernameFieldValid, passwordFieldValid, passwordConfirmationFieldValid, displayNameValid]);
 
     return (<div>
-        <form className="register-form" >
+        <form className="register-form" onSubmit={handleSignUp} method='post'>
             <div className="formField">
                 <label htmlFor="username" id="usernameLabel">Username:</label>
                 <input ref={usernameContainer} type="text" id="username" className="form-control" name="username"
