@@ -67,7 +67,7 @@ const Login = ({ setActiveUser, credentials}) => {
             </div>
             <div id="check"></div>
             <p>Not registered? <Link to="/register">Click here</Link> to register.</p>
-            <button type="submit" className="login-btn" id="login-btn" disabled>Login</button>
+            <button type="submit" className="logister-btn" id="login-btn" disabled>Login</button>
             <br></br><br></br>
         </form>
     </div>)
