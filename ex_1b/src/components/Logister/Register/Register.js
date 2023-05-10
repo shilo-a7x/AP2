@@ -139,24 +139,25 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
         // Validate username, password and display name
         // If valid, create new user, sign him in and redirect to main page
 
-        e.preventDefault();
-
+        
         console.log("before");
         console.log(credentials);
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
         const displayName = displayNameContainer.current.value;
+        console.log(credentials[username]);
         console.log(username);
-        if (credentials[username.value]) {
+        if (credentials[username]) {
             console.log("hello if");
             document.getElementById("usernameError").innerHTML = "Username is already taken";
             document.getElementById("username").classList.add("is-invalid");
             document.getElementById("usernameLabel").classList.add("text-danger");
             setUsernameFieldValid(false);
+            e.preventDefault();
             return;
         }
-
-        setCredentials({...credentials, username : password,});
+        
+        setCredentials({...credentials, [username] : password,});
         // Create new user
         const newUser = {
             "username": username,
@@ -167,7 +168,8 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
         console.log("after");
         console.log(credentials);
         console.log(users);
-        //navigate("/");
+        e.preventDefault();
+        navigate("/");
     }
 
     useEffect(() => {
@@ -176,7 +178,7 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
     }, [usernameFieldValid, passwordFieldValid, passwordConfirmationFieldValid, displayNameValid]);
 
     return (<div>
-        <form className="register-form" onSubmit={handleSignUp} method='post'>
+        <form className="register-form" onSubmit={handleSignUp} method="post">
             <div className="formField">
                 <label htmlFor="username" id="usernameLabel">Username:</label>
                 <input ref={usernameContainer} type="text" id="username" className="form-control" name="username"
@@ -198,7 +200,7 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
             <div className="formField">
                 <label htmlFor="confirmPassword" id="confirmPasswordLabel">Confirm Password:</label>
                 <input ref={confirmPasswordContainer} type="password" className="form-control" id="confirmPassword" name="confirmPassword"
-                    onBlur={() => {
+                    onBlurCapture={() => {
                         setTypeInConfirmation(true);
                         validatePasswordConfirmation();
                     }}
@@ -223,8 +225,8 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
                 </div>
             </div>
             <br></br>
-            <p>Already registered? <a href="login.html">Click here</a> to login.</p>
-            <button className="register-btn" id='register-btn'>Register</button>
+            <p>Already registered? <Link to="/">Click here</Link> to login.</p>
+            <button type="submit" className="register-btn" id='register-btn'>Register</button>
             <br></br><br></br>
         </form>
     </div>);

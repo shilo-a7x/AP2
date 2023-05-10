@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Login = ({ setUser, setToken }) => {
-    const usernameConteiner = useRef(null);
+const Login = ({ setActiveUser, credentials}) => {
+    const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
 
@@ -11,32 +11,26 @@ const Login = ({ setUser, setToken }) => {
         // Validate username and password
         // If valid, sign in user and redirect to main page
 
-        e.preventDefault();
-        const username = usernameConteiner.current.value;
+        const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
 
-        // Hide all error messages
-        document.querySelectorAll('.form-control').forEach(element => {
-            element.classList.remove("is-invalid");
-        });
-        document.querySelectorAll('.formContainerTitle').forEach(element => {
-            element.classList.remove("text-danger");
-        });
-
+        if (credentials[username] === password) {
+            setActiveUser(username);
+            document.getElementById("check").innerHTML = "success";
+        } else {
+            document.getElementById("check").innerHTML = "fail";
+        }
+        
+        // // Hide all error messages
+        // document.querySelectorAll('.form-control').forEach(element => {
+        //     element.classList.remove("is-invalid");
+        // });
+        // document.querySelectorAll('.formContainerTitle').forEach(element => {
+        //     element.classList.remove("text-danger");
+        // });
+        
         // Check if username and password are valid
-        signIn(username, password, setToken).then(user => {
-            // If valid
-            if (user) {
-                setUser(user);
-                navigate("/");
-            } else {
-                // Show error messages
-                document.getElementById("username").classList.add("is-invalid");
-                document.getElementById("usernameLabel").classList.add("text-danger");
-                // Disable submit button
-                document.getElementById("login-btn").disabled = true;
-            }
-        });
+        e.preventDefault();
     }
     // Prevent user from entering invalid characters
     const enforceUsernameRegEx = (e) => {
@@ -47,7 +41,7 @@ const Login = ({ setUser, setToken }) => {
 
     const handleChange = (e) => {
         // Check if username and password are empty
-        document.getElementById("login-btn").disabled = usernameConteiner.current.value === "" || passwordContainer.current.value === "";
+        document.getElementById("login-btn").disabled = usernameContainer.current.value === "" || passwordContainer.current.value === "";
     };
 
     const [isVisible, setVisible] = useState(0)
@@ -57,10 +51,10 @@ const Login = ({ setUser, setToken }) => {
     }
 
     return (<div id="form-frame">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} method="post">
             <div className="form-group">
                 <label htmlFor="username" className="formContainerTitle" id="usernameLabel">Username:</label>
-                <input type="text" className="form-control" id="username" name="username" ref={usernameConteiner}
+                <input type="text" className="form-control" id="username" name="username" ref={usernameContainer}
                     onChange={handleChange} onKeyDown={enforceUsernameRegEx} maxLength="15" required/>
             </div>
             <div className="form-group">
@@ -71,6 +65,7 @@ const Login = ({ setUser, setToken }) => {
                     <span className={isVisible ? "bi-eye-slash" : "bi-eye"} />
                 </button>
             </div>
+            <div id="check"></div>
             <p>Not registered? <Link to="/register">Click here</Link> to register.</p>
             <button type="submit" className="login-btn" id="login-btn" disabled>Login</button>
             <br></br><br></br>
@@ -79,6 +74,4 @@ const Login = ({ setUser, setToken }) => {
 }
 
 export default Login;
-export { signIn };
-
 
