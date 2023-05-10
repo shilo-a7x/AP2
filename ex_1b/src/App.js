@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register from "./components/Logister/Register/Register.js";
+import Register from "./components/Logister/Register/Register";
+import Login from "./components/Logister/Login/Login"
 import { useState } from 'react';
 
 
@@ -15,10 +16,16 @@ function App() {
       <div className="App">
         <main>
           <Routes>
-            <Route path='/' element={
+            <Route path='/register' element={
               // Render the Signup component.
               <>
                 <Register users={users} setUsers={setUsers} credentials={credentials} setCredentials={setCredentials}/>
+              </>
+            } />
+            <Route path='/' element={
+              // Render the Signin component.
+              <>
+                <Login credentials={credentials} setActiveUser={setActiveUser}/>
               </>
             } />
           </Routes>
