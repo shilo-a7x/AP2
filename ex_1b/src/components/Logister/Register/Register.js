@@ -135,6 +135,56 @@ const Register = () => {
         setDisplayNameFieldValid(!invalid);
     }
 
+    const handleSignUp = async (e) => {
+        // Validate username, password and display name
+        // If valid, create new user, sign him in and redirect to main page
+
+        e.preventDefault();
+
+        const username = usernameBox.current.value;
+        const password = passwordBox.current.value;
+        const displayName = displayNameBox.current.value;
+
+        // Create new user
+        const newUser = {
+            "username": username,
+            "password": password,
+            "confirmPassword": password,
+            "name": displayName,
+        };
+        // Sign up user
+        const response = await fetch("http://localhost:54321/api/contacts/signup", {
+            method: "POST", headers: {
+                "Content-Type": "application/json"
+            }, body: JSON.stringify(newUser)
+        });
+        if (response.ok) {
+            const user = await signIn(username, password, setToken);
+            if (user) {
+                setUser(user);
+                navigate("/");
+            } else {
+                // Show error messages
+                document.getElementById("floatingUsername").classList.add("is-invalid");
+                document.getElementById("username-label").classList.add("text-danger");
+                // Disable submit button
+                document.getElementById("sign-in-button").disabled = true;
+            }
+        } else {
+            // Since the server returns a 400 error, we can assume that the username is already taken
+
+            document.getElementById("username-error").innerHTML = "Username is already taken";
+            document.getElementById("floatingUsername").classList.add("is-invalid");
+            document.getElementById("username-label").classList.add("text-danger");
+            setUsernameFieldValid(false);
+        }
+    }
+
+    useEffect(() => {
+        // Check if all fields are valid, if not, disable submit button
+        document.getElementById("register-btn").disabled = !usernameFieldValid || !passwordFieldValid || !passwordConfirmationFieldValid || !displayNameValid;
+    }, [usernameFieldValid, passwordFieldValid, passwordConfirmationFieldValid, displayNameValid]);
+
     return (<div>
         <form className="register-form" >
             <div className="formField">
@@ -184,7 +234,7 @@ const Register = () => {
             </div>
             <br></br>
             <p>Already registered? <a href="login.html">Click here</a> to login.</p>
-            <button className="login-btn">Register</button>
+            <button className="register-btn" id='register-btn'>Register</button>
             <br></br><br></br>
         </form>
     </div>);
