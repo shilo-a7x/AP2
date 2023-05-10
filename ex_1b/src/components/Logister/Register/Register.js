@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Register = ({users, setUsers, credentials, setCredentials}) => {
+const Register = ({ users, setUsers, credentials, setCredentials }) => {
 
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
@@ -16,6 +16,14 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
     const [passwordConfirmationFieldValid, setPasswordConfirmationFieldValid] = useState(false);
     const [displayNameValid, setDisplayNameFieldValid] = useState(false);
     const [typeInConfirmation, setTypeInConfirmation] = useState(false);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    const validateAll = () => {
+        validatePasswordConfirmation();
+        validateDisplayName();
+        validatePasswordField();
+        validateUsername();
+    }
 
     const deleteUsernameError = () => {
         document.getElementById("usernameError").innerHTML = "";
@@ -135,20 +143,27 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
         setDisplayNameFieldValid(!invalid);
     }
 
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            // Set the selected file as the profile picture
+
+            // Create a preview image URL
+            const imageObjectURL = URL.createObjectURL(file);
+            setPreviewImage(imageObjectURL);
+        }
+    };
+
     const handleSignUp = (e) => {
         // Validate username, password and display name
         // If valid, create new user, sign him in and redirect to main page
 
-        
-        console.log("before");
-        console.log(credentials);
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
         const displayName = displayNameContainer.current.value;
-        console.log(credentials[username]);
-        console.log(username);
         if (credentials[username]) {
-            console.log("hello if");
             document.getElementById("usernameError").innerHTML = "Username is already taken";
             document.getElementById("username").classList.add("is-invalid");
             document.getElementById("usernameLabel").classList.add("text-danger");
@@ -156,18 +171,16 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
             e.preventDefault();
             return;
         }
-        
-        setCredentials({...credentials, [username] : password,});
+
+        setCredentials({ ...credentials, [username]: password, });
         // Create new user
         const newUser = {
             "username": username,
             "nick": displayName,
+            "profilePic": previewImage,
             "contacts": [],
         };
         setUsers([...users, newUser]);
-        console.log("after");
-        console.log(credentials);
-        console.log(users);
         e.preventDefault();
         navigate("/");
     }
@@ -210,23 +223,34 @@ const Register = ({users, setUsers, credentials, setCredentials}) => {
             </div>
             <div className="formField">
                 <label htmlFor="displayName" id="displayNameLabel">Display name:</label>
-                <input ref={displayNameContainer} type="text" id="displayName" className="form-control" name="displayName" 
-                onKeyDown={enforceDisplayNameRegEx} onBlur={validateDisplayName} onFocusCapture={deleteDisplayNameError}
-                maxLength="15" required />
+                <input ref={displayNameContainer} type="text" id="displayName" className="form-control" name="displayName"
+                    onKeyDown={enforceDisplayNameRegEx} onBlur={validateDisplayName} onFocusCapture={deleteDisplayNameError}
+                    maxLength="15" required />
                 <span className="errorMessage" id="displayNameError"></span>
             </div>
             <div className="formField">
                 <label htmlFor="profile-pic">Upload Picture:</label>
                 <div className="input-group">
                     <div className="custom-file">
-                        <input type="file" className="custom-file-input" id="formFile" name="profile-pic"></input>
+                        <input type="file" className="custom-file-input" id="formFile" name="profile-pic" accept="image/*"
+                            onChange={handleImageChange}></input>
                         <label className="custom-file-label" htmlFor="profile-pic">Choose file</label>
                     </div>
+                </div>
+                <br></br>
+                <div className="previewImg">
+                    {previewImage && (
+                        <img
+                            src={previewImage}
+                            alt="Profile Picture"
+                            style={{ width: '100px', height: '100px', borderRadius: '50px'}}
+                        />
+                    )}
                 </div>
             </div>
             <br></br>
             <p>Already registered? <Link to="/">Click here</Link> to login.</p>
-            <button type="submit" className="logister-btn" id='register-btn'>Register</button>
+            <button type="submit" className="logister-btn" id='register-btn' onMouseEnter={validateAll}>Register</button>
             <br></br><br></br>
         </form>
     </div>);

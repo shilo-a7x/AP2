@@ -34,7 +34,7 @@ input[type="password"] {
     color: red;
 }
 
-.loregister-btn {
+.logister-btn {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -45,10 +45,25 @@ input[type="password"] {
     float: right;
 }
 
-.loregister-btn:hover {
+.logister-btn:hover {
     background-color: #3e8e41;
 }
 
 .register-form {
     margin-bottom: 17.5vh;
 }
+
+.form-group>.show-password-button {
+    position: relative;
+    bottom: 0px;
+    left: calc(100%-100px);
+    font: 300 16px 'Lato', sans-serif;
+    color: var(--form-help);
+    background-color: transparent;
+    padding: 0 5px 0 5px;
+    user-select: none;
+    z-index: 4;
+    height: 100%;
+    border: none;
+}
+
