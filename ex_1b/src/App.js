@@ -1,13 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from "./components/Logister/Register/Register.js";
+import { useState } from 'react';
 
 
 
 function App() {
-  const [userDetails, setUserDetails] = useState([
-    { username: 'user1', password: 'password1' }
-  ]);
+  const [users, setUsers] = useState([]);
+  const [acitveUser, setActiveUser] = useState(null);
+  const [credentials, setCredentials] = useState({});
 
   return (
     <Router>
@@ -17,7 +18,7 @@ function App() {
             <Route path='/' element={
               // Render the Signup component.
               <>
-                <Register />
+                <Register users={users} setUsers={setUsers} credentials={credentials} setCredentials={setCredentials}/>
               </>
             } />
           </Routes>
