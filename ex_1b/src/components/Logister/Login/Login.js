@@ -62,7 +62,7 @@ const Login = ({ setActiveUser, credentials}) => {
                 <input type={isVisible ? "text" : "password"} ref={passwordContainer} className="form-control"
                     maxLength="25" name="password" onChange={handleChange} />
                 <button className="show-password-button" type="button" onClick={makeVisible}>
-                    <span className={isVisible ? "bi-eye-slash" : "bi-eye"} />
+                    <span className={isVisible ? "bi bi-eye-slash" : "bi bi-eye"}></span>
                 </button>
             </div>
             <div id="check"></div>
