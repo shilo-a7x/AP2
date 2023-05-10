@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Register = () => {
+const Register = ({users, setUsers, credentials, setCredentials}) => {
 
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
@@ -135,49 +135,36 @@ const Register = () => {
         setDisplayNameFieldValid(!invalid);
     }
 
-    const handleSignUp = async (e) => {
+    const handleSignUp = (e) => {
         // Validate username, password and display name
         // If valid, create new user, sign him in and redirect to main page
 
         e.preventDefault();
 
-        const username = usernameBox.current.value;
-        const password = passwordBox.current.value;
-        const displayName = displayNameBox.current.value;
+        console.log("before");
+        console.log(credentials);
+        const username = usernameContainer.current.value;
+        const password = passwordContainer.current.value;
+        const displayName = displayNameContainer.current.value;
+        if (credentials[username]) {
+            document.getElementById("usernameError").innerHTML = "Username is already taken";
+            document.getElementById("username").classList.add("is-invalid");
+            document.getElementById("usernameLabel").classList.add("text-danger");
+            setUsernameFieldValid(false);
+            return;
+        }
 
+        setCredentials({...credentials, username : password,});
         // Create new user
         const newUser = {
             "username": username,
-            "password": password,
-            "confirmPassword": password,
-            "name": displayName,
+            "nick": displayName,
+            "contacts": [],
         };
-        // Sign up user
-        const response = await fetch("http://localhost:54321/api/contacts/signup", {
-            method: "POST", headers: {
-                "Content-Type": "application/json"
-            }, body: JSON.stringify(newUser)
-        });
-        if (response.ok) {
-            const user = await signIn(username, password, setToken);
-            if (user) {
-                setUser(user);
-                navigate("/");
-            } else {
-                // Show error messages
-                document.getElementById("floatingUsername").classList.add("is-invalid");
-                document.getElementById("username-label").classList.add("text-danger");
-                // Disable submit button
-                document.getElementById("sign-in-button").disabled = true;
-            }
-        } else {
-            // Since the server returns a 400 error, we can assume that the username is already taken
-
-            document.getElementById("username-error").innerHTML = "Username is already taken";
-            document.getElementById("floatingUsername").classList.add("is-invalid");
-            document.getElementById("username-label").classList.add("text-danger");
-            setUsernameFieldValid(false);
-        }
+        setUsers([...users, newUser]);
+        navigate("/");
+        console.log("after");
+        console.log(credentials);
     }
 
     useEffect(() => {
