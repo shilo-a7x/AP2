@@ -16,22 +16,15 @@ const Login = ({ setActiveUser, credentials}) => {
 
         if (credentials[username] === password) {
             setActiveUser(username);
-            document.getElementById("check").innerHTML = "success";
+            document.getElementById("errorMessage").innerHTML = "success";
         } else {
-            document.getElementById("check").innerHTML = "fail";
+            document.getElementById("errorMessage").innerHTML = "username or password incorrect";
         }
-        
-        // // Hide all error messages
-        // document.querySelectorAll('.form-control').forEach(element => {
-        //     element.classList.remove("is-invalid");
-        // });
-        // document.querySelectorAll('.formContainerTitle').forEach(element => {
-        //     element.classList.remove("text-danger");
-        // });
         
         // Check if username and password are valid
         e.preventDefault();
     }
+
     // Prevent user from entering invalid characters
     const enforceUsernameRegEx = (e) => {
         if (!/[a-zA-Z0-9-]$/.test(e.key)) {
@@ -41,6 +34,7 @@ const Login = ({ setActiveUser, credentials}) => {
 
     const handleChange = (e) => {
         // Check if username and password are empty
+        document.getElementById("errorMessage").innerHTML = "";
         document.getElementById("login-btn").disabled = usernameContainer.current.value === "" || passwordContainer.current.value === "";
     };
 
@@ -65,7 +59,7 @@ const Login = ({ setActiveUser, credentials}) => {
                     <span className={isVisible ? "bi bi-eye-slash" : "bi bi-eye"}></span>
                 </button>
             </div>
-            <div id="check"></div>
+            <div id="errorMessage" className="errorMessage"></div>
             <p>Not registered? <Link to="/register">Click here</Link> to register.</p>
             <button type="submit" className="logister-btn" id="login-btn" disabled>Login</button>
             <br></br><br></br>
