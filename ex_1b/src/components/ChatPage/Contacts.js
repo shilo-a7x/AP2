@@ -15,12 +15,12 @@ const Contacts = ({ user, setUser, currentChatID, setCurrentChatID }) => {
     }
 
     return (
-        <div class="contact" onClick={selectChat}>
+        <div className="contact" onClick={selectChat}>
             <div class="info">
                 <img src="pics/niceMan.jpg" />
                 <span class="name"></span>
                 <span class="last-message"></span>
-                <p class="last-message-date">9:15</p>
+                <p class="last-message-date">21/04/2023 11:15 pm</p>
             </div>
         </div>
     );

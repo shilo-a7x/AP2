@@ -9,7 +9,7 @@ const ChatSection = ({user, setUser, currentChatID, messagesCache, setMessagesCa
     const [messageEmpty, setMessageEmpty] = useState(true);
 
     const messagesLength = currentChatID !== -1 ? user.chats[currentChatID].messages.length : 0;
-    const sendMessage = async (message) => {
+    const sendMessage = (message) => {
         // Add new message to current chat's messages
         if (currentChatID !== -1) {
             setUser({
@@ -18,13 +18,6 @@ const ChatSection = ({user, setUser, currentChatID, messagesCache, setMessagesCa
                         ...user.chats[currentChatID], messages: [...user.chats[currentChatID].messages, message]
                     }
                 }
-            });
-
-            // Send message to the server
-            await fetch("http://localhost:54321/api/contacts/" + currentChatID + "/messages", {
-                method: "POST", headers: {
-                    "Authorization": "Bearer " + user.token, "Content-Type": "application/json"
-                }, body: JSON.stringify({content: message.content})
             });
         }
     };
@@ -50,15 +43,6 @@ const ChatSection = ({user, setUser, currentChatID, messagesCache, setMessagesCa
             messageBox.current.value = '';
             setInputHeight();
         }
-    };
-
-    const typing = () => {
-        setMessageEmpty(messageBox.current.value.length === 0);
-        setInputHeight();
-        // Store written message for current contact in cache
-        setMessagesCache({
-            ...messagesCache, [currentChatID]: messageBox.current.value
-        });
     };
 
     const setInputHeight = () => {
