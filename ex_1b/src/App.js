@@ -8,7 +8,7 @@ import ChatPage from './components/chatPage/ChatPage';
 
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({});
   const [acitveUser, setActiveUser] = useState(null);
   const [credentials, setCredentials] = useState({});
 
