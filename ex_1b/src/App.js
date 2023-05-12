@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from "./components/Logister/Register/Register";
 import Login from "./components/Logister/Login/Login"
 import { useState } from 'react';
-import ChatPage from './components/chatPage/ChatPage';
+import ChatPage from './components/ChatPage/ChatPage';
 
 
 
 function App() {
   const [users, setUsers] = useState({});
-  const [acitveUser, setActiveUser] = useState(null);
+  const [acitveUser, setActiveUser] = useState('');
   const [credentials, setCredentials] = useState({});
 
   return (
@@ -20,19 +20,19 @@ function App() {
             <Route path='/register' element={
               // Render the Signup component.
               <>
-                <Register users={users} setUsers={setUsers} credentials={credentials} setCredentials={setCredentials}/>
+                <Register users={users} setUsers={setUsers} credentials={credentials} setCredentials={setCredentials} />
               </>
             } />
             <Route path='/' element={
               // Render the Signin component.
               <>
-                <Login credentials={credentials} setActiveUser={setActiveUser}/>
+                <Login credentials={credentials} setActiveUser={setActiveUser} />
               </>
             } />
-            <Route path='/chatPage' element={
+            <Route path='/ChatPage' element={
               // Render the Signin component.
               <>
-                <ChatPage activeUser={acitveUser}/>
+                <ChatPage acitveUser={acitveUser} activeUser={acitveUser} setActiveUser={setActiveUser} />
               </>
             } />
           </Routes>

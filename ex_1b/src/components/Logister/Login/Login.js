@@ -2,10 +2,11 @@ import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Login = ({ setActiveUser, credentials}) => {
+const Login = ({ activeUser, setActiveUser, credentials}) => {
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
+
 
     const handleLogin = (e) => {
         // Validate username and password
@@ -16,7 +17,9 @@ const Login = ({ setActiveUser, credentials}) => {
 
         if (credentials[username] === password) {
             setActiveUser(username);
-            document.getElementById("errorMessage").innerHTML = "success";
+            console.log(activeUser);
+            console.log(username);
+            navigate("/ChatPage");
         } else {
             document.getElementById("errorMessage").innerHTML = "username or password incorrect";
         }

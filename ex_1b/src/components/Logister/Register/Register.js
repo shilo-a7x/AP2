@@ -175,7 +175,6 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
         setCredentials({ ...credentials, [username]: password });
         // Create new user
         const newUser = {
-            "username": username,
             "nick": displayName,
             "profilePic": previewImage,
             "contacts": {}
