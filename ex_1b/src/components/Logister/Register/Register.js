@@ -172,7 +172,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
             return;
         }
 
-        setCredentials({ ...credentials, [username]: password, });
+        setCredentials({ ...credentials, [username]: password });
         // Create new user
         const newUser = {
             "username": username,
