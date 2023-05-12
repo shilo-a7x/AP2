@@ -178,7 +178,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
             "username": username,
             "nick": displayName,
             "profilePic": previewImage,
-            "contacts": [],
+            "contacts": []
         };
         setUsers([...users, newUser]);
         e.preventDefault();

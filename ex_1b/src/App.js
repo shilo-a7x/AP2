@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from "./components/Logister/Register/Register";
 import Login from "./components/Logister/Login/Login"
 import { useState } from 'react';
+import ChatPage from './components/chatPage/ChatPage';
 
 
 
@@ -26,6 +27,12 @@ function App() {
               // Render the Signin component.
               <>
                 <Login credentials={credentials} setActiveUser={setActiveUser}/>
+              </>
+            } />
+            <Route path='/chatPage' element={
+              // Render the Signin component.
+              <>
+                <ChatPage activeUser={acitveUser}/>
               </>
             } />
           </Routes>
