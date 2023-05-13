@@ -1,43 +1,36 @@
-import ContactsSection from "./ContactsSection"
-import ChatSection from "./ChatSection";
 import "./Chat.css";
-import { useEffect, useState, useCallback } from "react";
-import { HubConnectionBuilder } from "@microsoft/signalr";
-import { getContacts, getMessages } from "../Auth/SignIn/SignInForm";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const ChatPage = ({ user }) => {
-    const [currentChatID, setCurrentChatID] = useState(-1);
-    const [hasToUpdate, setHasToUpdate] = useState(false);
-    const [connection, setConnection] = useState(null);
-    // Create a cache for the messages the user has written to each contact
-    const [messagesCache, setMessagesCache] = useState(Object.assign({}, ...Object.keys(user.chats).map((id) => {
-        return {
-            [id]: ""
-        }
-    })));
+const ChatPage = ({ acitveUser, setActiveUser }) => {
 
-    return (
-        <div class="container">
-            <div class="left-panel">
-                <ChatSection user={user}
-                    setUser={setUser}
-                    token={token}
-                    currentChatID={currentChatID}
-                    messagesCache={messagesCache}
-                    setMessagesCache={setMessagesCache}
-                    theme={theme} setTheme={setTheme} />
+    const navigate = useNavigate();
+
+    const logout = () => {
+        setActiveUser(null);
+        navigate("/");
+    }
+
+    return (<div>
+        <button type="button" className="Logout-button" onClick={logout}>Logout</button>
+        <br></br>
+        <div className="container">
+            <div className="left-panel">
+                {/* <ContactColumn acitveUser={acitveUser} /> */}
             </div>
-            <div class="right-panel">
-                <ContactsSection user={user}
+            <div className="right-panel">
+                <span>{acitveUser}hello</span>
+                {/* <MessageColumn user={user}
                     setUser={setUser}
                     token={token}
                     currentChatID={currentChatID}
                     setCurrentChatID={setCurrentChatID}
                     messagesCache={messagesCache}
                     setMessagesCache={setMessagesCache}
-                    connection={connection} />
+                    connection={connection} /> */}
             </div>
         </div>
+    </div>
     );
 };
 

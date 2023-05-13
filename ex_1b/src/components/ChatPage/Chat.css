@@ -19,11 +19,14 @@ body {
     margin-top: 5px;
 }
 
+.Logout-button:hover{
+    background-color: #cc0e0e;
+}
+
 .container {
     display: flex;
     height: 87vh;
-    margin-left: 350px;
-    margin-right: 300px;
+    margin-left: 180px;
     margin-top: 2vh;
     margin-bottom: 7.7vh;
     border-radius: 10px;

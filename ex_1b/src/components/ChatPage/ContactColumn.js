@@ -1,20 +1,12 @@
-import './ContactsSection.css'
-import Contacts from "./Contacts";
-import {useEffect, useRef} from "react";
+import './Chat.css'
+import Contact from "./Contact";
+import { useEffect, useRef } from "react";
 
-const ContactColumn = ({
-                             user,
-                             setUser,
-                             currentChatID,
-                             setCurrentChatID,
-                             messagesCache,
-                             setMessagesCache,
-                             token,
-                             connection
-                         }) => {
+const ContactColumn = ({ acitveUser }) => {
     const contactUsernameInput = useRef(null);
     const contactNameInput = useRef(null);
     const contactServerInput = useRef(null);
+
     useEffect(() => {
         const contactModal = document.getElementById("addContactModal");
         contactModal.addEventListener("hidden.bs.modal", () => {
@@ -28,7 +20,7 @@ const ContactColumn = ({
     }, []);
 
     const addContact = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         document.getElementById("add-contact-input").classList.remove("is-invalid");
         document.getElementById("contact-name-input").classList.remove("is-invalid");
         document.getElementById("contact-server-input").classList.remove("is-invalid");
@@ -72,29 +64,8 @@ const ContactColumn = ({
         const contact = {
             "id": contactUsernameInput.current.value,
             "name": contactNameInput.current.value,
-            "server": contactServerInput.current.value
         };
 
-        // Search for user in database
-        const contactUser = await fetch('http://localhost:54321/api/contacts', {
-            method: "POST", headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + token,
-                'Accept': 'application/json',
-            }, body: JSON.stringify(contact)
-        });
-        if (!contactUser.ok) {
-            // Get body of contactUser
-            const contactUserBody = await contactUser.json();
-            if (contactUserBody === "Couldn't communicate with remote server") {
-                document.getElementById("add-contact-server-error").innerHTML = contactUserBody;
-                document.getElementById("contact-server-input").classList.add("is-invalid");
-            } else {
-                document.getElementById("add-contact-error").innerHTML = contactUserBody;
-                document.getElementById("add-contact-input").classList.add("is-invalid");
-            }
-            return;
-        }
         // Create chat
         const chat = {
             id: requestedContact,
@@ -103,7 +74,7 @@ const ContactColumn = ({
         }
         setUser(u => ({
             ...u,
-            chats: {...u.chats, [requestedContact]: chat}
+            chats: { ...u.chats, [requestedContact]: chat }
         }));
 
 
@@ -167,7 +138,7 @@ const ContactColumn = ({
                     <span className="profile-pic">
                         <img
                             src="media/profile_picture.png"
-                            className="center" alt="profile-pic"/>
+                            className="center" alt="profile-pic" />
                     </span>
                     <span className="user-header-title">
                         <div className="center">
@@ -177,14 +148,14 @@ const ContactColumn = ({
                 </span>
                 <span className="buttons">
                     <button className="icon-button center" data-bs-toggle="modal" data-bs-target="#addContactModal">
-                        <i className="bi bi-person-plus"/>
+                        <i className="bi bi-person-plus" />
                     </button>
                 </span>
             </div>
 
             <div className="contacts">
-                <Contacts user={user} setUser={setUser} currentChatID={currentChatID}
-                              setCurrentChatID={setCurrentChatID}/>
+                <Contacts user={acitveUser} setUser={setUser} currentChatID={currentChatID}
+                    setCurrentChatID={setCurrentChatID} />
             </div>
 
             <div className="modal fade" id="addContactModal">
@@ -193,36 +164,36 @@ const ContactColumn = ({
                         <div className="modal-header">
                             <h4 className="modal-title">Add Contact</h4>
                             <button type="button" className="close-button" data-bs-dismiss="modal"
-                                    id="close-modal-button">
-                                <i className="bi bi-x"/>
+                                id="close-modal-button">
+                                <i className="bi bi-x" />
                             </button>
                         </div>
                         <div className="modal-body">
                             <div className="form-group">
                                 <label htmlFor="floatingInput" className="form-help contacts-form-help"
-                                       id="username-label">Username</label>
+                                    id="username-label">Username</label>
                                 <input type="text" ref={contactUsernameInput} className="add-contact-input form-control"
-                                       id="add-contact-input" onKeyPress={handleUsernameKeyPress}
-                                       onChange={clearUsernameError}/>
-                                <label className="invalid-feedback" id="add-contact-error"/>
+                                    id="add-contact-input" onKeyPress={handleUsernameKeyPress}
+                                    onChange={clearUsernameError} />
+                                <label className="invalid-feedback" id="add-contact-error" />
                                 <label htmlFor="floatingInput" className="form-help contacts-form-help"
-                                       id="username-label">Display
+                                    id="username-label">Display
                                     name</label>
                                 <input type="text" ref={contactNameInput} className="add-contact-input form-control"
-                                       id="contact-name-input" onKeyPress={handleNameKeyPress}/>
-                                <label className="invalid-feedback" id="add-contact-name-error"/>
+                                    id="contact-name-input" onKeyDown={handleNameKeyPress} />
+                                <label className="invalid-feedback" id="add-contact-name-error" />
                                 <label htmlFor="floatingInput" className="form-help contacts-form-help"
-                                       id="username-label">Server</label>
+                                    id="username-label">Server</label>
                                 <input type="text" ref={contactServerInput} className="add-contact-input form-control"
-                                       id="contact-server-input" onKeyPress={handleServerKeyPress}/>
-                                <label className="invalid-feedback" id="add-contact-server-error"/>
+                                    id="contact-server-input" onKeyDown={handleServerKeyPress} />
+                                <label className="invalid-feedback" id="add-contact-server-error" />
 
                             </div>
                         </div>
 
                         <div className="modal-footer">
                             <button type="button" className="icon-button" onClick={addContact}>
-                                <i className="bi bi-plus-circle"/>
+                                <i className="bi bi-plus-circle" />
                             </button>
                         </div>
 
@@ -234,3 +205,4 @@ const ContactColumn = ({
 }
 
 export default ContactColumn;
+
