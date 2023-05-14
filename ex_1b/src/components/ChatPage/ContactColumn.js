@@ -1,8 +1,8 @@
 import './Chat.css'
-//import ContactList from "./ContactList";
+import ContactList from "./ContactList";
 import { useEffect, useRef, useState } from "react";
 
-const ContactColumn = ({ activeUser }) => {
+const ContactColumn = ({ activeUser, currentChat, setCurrentChat }) => {
     // const contactUsernameInput = useRef(null);
     // const contactNameInput = useRef(null);
     const newContact = useRef('');
@@ -127,7 +127,7 @@ const ContactColumn = ({ activeUser }) => {
 
     return (
         <>
-            {/* <div className="left-panel">
+            {/* 
                 <span className="user-header">
                     <span className="profile-pic">
                         <img
@@ -145,46 +145,44 @@ const ContactColumn = ({ activeUser }) => {
                         <i className="bi bi-person-plus" />
                     </button>
                 </span>
+            
+
+            */}
+
+
+            <div className="left-panel">
+                <div className="profile">
+                    <img
+                        src={activeUser?.profilePic}
+                        alt="Profile Picture"
+                        style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+                    />
+                    <p className="name">{activeUser?.name} no name</p>
+                    <button type="button" className="addContactButton" data-bs-toggle="modal"
+                        data-bs-target="#addContactModal">
+                        <i className="bi bi-person-plus"></i>
+                    </button>
+                </div>
+                <div className="contacts">
+                    <ContactList user={activeUser} currentChatID={currentChat}
+                        setCurrentChatID={setCurrentChat} />
+                </div>
             </div>
 
-            <div className="contacts">
-                <Contacts user={activeUser} setUser={setUser} currentChatID={currentChatID}
-                    setCurrentChatID={setCurrentChatID} />
-            </div> */}
 
 
-
-
-
-
-            <div className="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+            <div className="modal fade" id="addContactModal" tabIndex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
-                    <div class="modal-content">
+                    <div className="modal-content">
                         <div className="modal-header">
-
                             <h5 className="modal-title" id="addContactModalLabel">Add New Contact</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            {/* <div className="form-group">
-                            <label htmlFor="floatingInput" className="form-help contacts-form-help"
-                                id="username-label">Username</label>
-                            <input type="text" ref={contactUsernameInput} className="add-contact-input form-control"
-                                id="add-contact-input" onKeyPress={handleUsernameKeyPress}
-                                onChange={clearUsernameError} />
-                            <label className="invalid-feedback" id="add-contact-error" />
-                            <label htmlFor="floatingInput" className="form-help contacts-form-help"
-                                id="username-label">Display
-                                name</label>
-                            <input type="text" ref={contactNameInput} className="add-contact-input form-control"
-                                id="contact-name-input" onKeyDown={handleNameKeyPress} />
-                            <label className="invalid-feedback" id="add-contact-name-error" />
-                        </div> */}
-
                             <form>
                                 <div className="mb-3">
-                                    <label ref={newContact} for="name" className="form-label">Contact Username</label>
+                                    <label ref={newContact} htmlFor="name" className="form-label">Contact Username</label>
                                     <input type="text" className="form-control" id="name" placeholder="Enter name"></input>
                                 </div>
                             </form>
@@ -198,30 +196,7 @@ const ContactColumn = ({ activeUser }) => {
                 </div>
             </div>
 
-            <div class="left-panel">
-                <div className="profile">
-                    <img
-                        src={activeUser?.profilePic}
-                        alt="Profile Picture"
-                        style={{ width: '100px', height: '100px', borderRadius: '50%' }}
-                    />
-                    <p className="name">{activeUser?.name} no name</p>
-                    <button type="button" className="addContactButton" data-bs-toggle="modal"
-                        data-bs-target="#addContactModal">
-                        <i className="bi bi-person-plus"></i>
-                    </button>
-                </div>
-                <div className="contact-list">
-                    <div className="contact">
-                        <div className="info">
-                            <img src="pics/mom.png" />
-                            <span className="name">contact 1</span>
-                            <div className="last-message">eyes see falses and lies!</div>
-                            <p className="last-message-date">23/04/2023 4:15 pm</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
         </>
     );

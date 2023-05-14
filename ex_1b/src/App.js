@@ -10,7 +10,8 @@ import ChatPage from './components/ChatPage/ChatPage';
 function App() {
   const [users, setUsers] = useState({});
   const [activeUser, setActiveUser] = useState('');
-  const [credentials, setCredentials] = useState({});
+  const [credentials, setCredentials] = useState({a:"1"});
+  
 
   return (
     <Router>
@@ -26,13 +27,13 @@ function App() {
             <Route path='/' element={
               // Render the Signin component.
               <>
-                <Login credentials={credentials} setActiveUser={setActiveUser} />
+                <Login activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials}/>
               </>
             } />
             <Route path='/ChatPage' element={
               // Render the Signin component.
               <>
-                <ChatPage activeUser={activeUser} setActiveUser={setActiveUser} />
+                <ChatPage activeUser={activeUser} />
               </>
             } />
           </Routes>
