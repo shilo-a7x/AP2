@@ -1,9 +1,10 @@
 import "./Chat.css";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import ContactColumn from "./ContactColumn";
 
 const ChatPage = ({ acitveUser, setActiveUser }) => {
-
+    const [currentChat, setCurrentChat] = useState(-1);
     const navigate = useNavigate();
 
     const logout = () => {
@@ -16,7 +17,7 @@ const ChatPage = ({ acitveUser, setActiveUser }) => {
         <br></br>
         <div className="container">
             <div className="left-panel">
-                {/* <ContactColumn acitveUser={acitveUser} /> */}
+                { <ContactColumn acitveUser={acitveUser} currentChat={currentChat} setCurrentChat={setCurrentChat} /> }
             </div>
             <div className="right-panel">
                 <span>{acitveUser}hello</span>

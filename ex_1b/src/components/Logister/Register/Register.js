@@ -173,11 +173,12 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
         }
 
         setCredentials({ ...credentials, [username]: password });
+        
         // Create new user
         const newUser = {
-            "nick": displayName,
-            "profilePic": previewImage,
-            "contacts": {}
+            nick: displayName,
+            profilePic: previewImage,
+            contacts: {}
         };
         setUsers({...users, [username]: newUser});
         e.preventDefault();

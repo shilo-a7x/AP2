@@ -1,0 +1,76 @@
+import React, { useState } from 'react';
+
+function ContactForm({ addContact }) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Create a new contact object
+    const newContact = {
+      name: name,
+      phone: phone
+    };
+
+    // Call the addContact function passed as prop
+    addContact(newContact);
+
+    // Clear the form inputs
+    setName('');
+    setPhone('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="tel"
+        placeholder="Phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <button type="submit">Add Contact</button>
+    </form>
+  );
+}
+
+function ContactList({ contacts }) {
+  return (
+    <ul>
+      {contacts.map((contact, index) => (
+        <li key={index}>
+          {contact.name} - {contact.phone}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Apps() {
+  const [contacts, setContacts] = useState([]);
+
+  const addContact = (newContact) => {
+    // Update the contact list with the new contact
+    setContacts([...contacts, newContact]);
+  };
+
+  return (
+    <div>
+      <h1>Contact List</h1>
+      <ContactForm addContact={addContact} />
+      <ContactList contacts={contacts} />
+    </div>
+  );
+}
+
+export default Apps;
+
+
+
+
