@@ -1,6 +1,8 @@
 import "./Chat.css";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import ContactColumn from "./ContactColumn";
+import Apps from "./test";
 
 const ChatPage = ({ acitveUser, setActiveUser }) => {
 
@@ -16,7 +18,7 @@ const ChatPage = ({ acitveUser, setActiveUser }) => {
         <br></br>
         <div className="container">
             <div className="left-panel">
-                {/* <ContactColumn acitveUser={acitveUser} /> */}
+                { <ContactColumn acitveUser={acitveUser} /> }
             </div>
             <div className="right-panel">
                 <span>{acitveUser}hello</span>

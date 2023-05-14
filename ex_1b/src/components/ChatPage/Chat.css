@@ -19,7 +19,7 @@ body {
     margin-top: 5px;
 }
 
-.Logout-button:hover{
+.Logout-button:hover {
     background-color: #cc0e0e;
 }
 
@@ -70,6 +70,7 @@ body {
 }
 
 .addContactButton {
+    position: relative;
     background-color: #00d5ff;
     color: #002b03;
     border: none;
@@ -77,16 +78,33 @@ body {
     margin-top: 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 160px;
     width: 50px;
+    left: 260px;
 }
 
-.modal-title{
+.modal-title {
     color: #000;
 }
 
-.modal-body{
+.modal-body {
     color: #000;
+}
+
+.modal-content {
+    height: 50vh;
+}
+
+.modal-body {
+    position: relative;
+    top: 0px;
+    padding-bottom: 190px;
+}
+
+.modal-footer {
+    position: absolute;
+    top: 40vh;
+    margin-left: 327px;
+    float: left;
 }
 
 .contact {

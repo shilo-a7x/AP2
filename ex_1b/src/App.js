@@ -9,7 +9,7 @@ import ChatPage from './components/ChatPage/ChatPage';
 
 function App() {
   const [users, setUsers] = useState({});
-  const [acitveUser, setActiveUser] = useState('');
+  const [activeUser, setActiveUser] = useState('');
   const [credentials, setCredentials] = useState({});
 
   return (
@@ -32,7 +32,7 @@ function App() {
             <Route path='/ChatPage' element={
               // Render the Signin component.
               <>
-                <ChatPage acitveUser={acitveUser} activeUser={acitveUser} setActiveUser={setActiveUser} />
+                <ChatPage activeUser={activeUser} setActiveUser={setActiveUser} />
               </>
             } />
           </Routes>
