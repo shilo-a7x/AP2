@@ -1,9 +1,9 @@
 import "./Chat.css";
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ContactColumn from "./ContactColumn";
 
-const ChatPage = ({ acitveUser, setActiveUser }) => {
+const ChatPage = ({ activeUser, setActiveUser }) => {
     const [currentChat, setCurrentChat] = useState(-1);
     const navigate = useNavigate();
 
@@ -12,15 +12,19 @@ const ChatPage = ({ acitveUser, setActiveUser }) => {
         navigate("/");
     }
 
+    useEffect (() => {
+        console.log(activeUser);
+    })
+
     return (<div>
         <button type="button" className="Logout-button" onClick={logout}>Logout</button>
         <br></br>
         <div className="container">
             <div className="left-panel">
-                { <ContactColumn acitveUser={acitveUser} currentChat={currentChat} setCurrentChat={setCurrentChat} /> }
+                {<ContactColumn activeUser={activeUser} currentChat={currentChat} setCurrentChat={setCurrentChat} />}
             </div>
             <div className="right-panel">
-                <span>{acitveUser}hello</span>
+                <span>hello</span>
                 {/* <MessageColumn user={user}
                     setUser={setUser}
                     token={token}

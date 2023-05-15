@@ -173,14 +173,18 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
         }
 
         setCredentials({ ...credentials, [username]: password });
-        
         // Create new user
         const newUser = {
-            nick: displayName,
-            profilePic: previewImage,
-            contacts: {}
+            [username]: {
+                password: password,
+                nick: displayName,
+                profilePic: previewImage,
+                contacts: {}
+            }
         };
-        setUsers({...users, [username]: newUser});
+
+        setUsers({ ...users, ...newUser });
+
         e.preventDefault();
         navigate("/");
     }
@@ -243,7 +247,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
                         <img
                             src={previewImage}
                             alt="Profile Picture"
-                            style={{ width: '100px', height: '100px', borderRadius: '50px'}}
+                            style={{ width: '100px', height: '100px', borderRadius: '50px' }}
                         />
                     )}
                 </div>
