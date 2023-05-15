@@ -1,12 +1,15 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Login = ({ activeUser, setActiveUser, credentials}) => {
+const Login = ({ users, activeUser, setActiveUser, credentials}) => {
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
 
+    useEffect (() => {
+        console.log(activeUser)        
+    },[activeUser])
 
     const handleLogin = (e) => {
         // Validate username and password
@@ -16,7 +19,7 @@ const Login = ({ activeUser, setActiveUser, credentials}) => {
         const password = passwordContainer.current.value;
 
         if (credentials[username] === password) {
-            setActiveUser(username);
+            setActiveUser(users[username]);
             console.log(activeUser);
             console.log(username);
             navigate("/ChatPage");

@@ -27,13 +27,13 @@ function App() {
             <Route path='/' element={
               // Render the Signin component.
               <>
-                <Login activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials}/>
+                <Login users={users} activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials}/>
               </>
             } />
             <Route path='/ChatPage' element={
               // Render the Signin component.
               <>
-                <ChatPage activeUser={activeUser} />
+                <ChatPage activeUser={activeUser} setActiveUser={setActiveUser} />
               </>
             } />
           </Routes>
