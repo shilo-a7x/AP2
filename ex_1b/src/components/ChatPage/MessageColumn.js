@@ -107,7 +107,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
                 <span className="user-header">
                     <span className="profile-pic">
                         <img
-                            src="media/profile_picture.png"
+                            src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
                             className="center" alt="profile-pic" />
                     </span>
                     <span className="user-header-title">
