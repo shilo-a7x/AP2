@@ -37,7 +37,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                 <div className="profile">
                     <img
                         src={activeUser?.profilePic}
-                        alt="lol"
+                        alt="profile pic"
                     />
                     <p className="name">{activeUser?.nick}</p>
                     <button type="button" className="addContactButton" data-bs-toggle="modal"

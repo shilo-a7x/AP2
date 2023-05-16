@@ -105,10 +105,10 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
         {(currentChat !== -1 && <>
             <div className="chat-section-header">
                 <span className="user-header">
-                    <span className="profile-pic">
+                    <span className="profile">
                         <img
                             src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
-                            className="center" alt="profile-pic" />
+                            className="center" alt="profile pic" />
                     </span>
                     <span className="user-header-title">
                         <div className="center">
