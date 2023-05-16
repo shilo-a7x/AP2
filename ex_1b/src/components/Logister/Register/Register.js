@@ -176,10 +176,10 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
         // Create new user
         const newUser = {
             [username]: {
-                password: password,
+                //password: password,
                 nick: displayName,
                 profilePic: previewImage,
-                contacts: {}
+                chats: {}
             }
         };
 

@@ -3,20 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import './Chat.css'
 
 
-const ContactColumn = ({ setUsers, activeUser, currentChat, setCurrentChat }) => {
-    // const contactUsernameInput = useRef(null);
-    const contactNameInput = useRef(null);
-    const newContact = useRef('');
+const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat }) => {
+    const newContact = useRef(null);
 
     useEffect(() => {
         console.log(activeUser)
     }, [])
 
-    const addContact = () => {
-        const requestedContact = contactNameInput.current.value;
+    const addContact = (e) => {
+        const newContactName = newContact.current.value;
 
         const contact = {
-            "name": newContact.current.value,
+            name: newContactName,
         };
 
         const chat = {
@@ -24,11 +22,11 @@ const ContactColumn = ({ setUsers, activeUser, currentChat, setCurrentChat }) =>
             messages: []
         }
 
-        setUsers(u => ({
+        setActiveUser(u => ({
             ...u,
-            chats: { ...u.chats, [requestedContact]: chat }
+            chats: { ...u.chats, [newContactName]: chat }
         }));
-
+        e.preventDefault();
         document.getElementById("close-btn").click();
     }
 
@@ -55,8 +53,8 @@ const ContactColumn = ({ setUsers, activeUser, currentChat, setCurrentChat }) =>
                 <div class="contact-list">
                     <div className="contacts">
 
-                        <ContactList user={activeUser} currentChatID={currentChat}
-                            setCurrentChatID={setCurrentChat} />
+                        <ContactList activeUser={activeUser} currentChat={currentChat}
+                            setCurrentChat={setCurrentChat} />
                     </div>
                 </div>
             </div>
@@ -72,8 +70,8 @@ const ContactColumn = ({ setUsers, activeUser, currentChat, setCurrentChat }) =>
                         <div className="modal-body">
                             <form>
                                 <div className="mb-3">
-                                    <label ref={newContact} htmlFor="name" className="form-label">Contact Username</label>
-                                    <input type="text" className="form-control" id="name" placeholder="Enter name"
+                                    <label htmlFor="name" className="form-label">Contact Username</label>
+                                    <input ref={newContact} type="text" className="form-control" id="name" placeholder="Enter name"
                                         maxLength="15"></input>
                                 </div>
                             </form>

@@ -9,9 +9,9 @@ import ChatPage from './components/ChatPage/ChatPage';
 
 function App() {
   const [users, setUsers] = useState({a: {
-    password: "1",
     nick: "admin",
-    contacts: {}
+    profilePic: process.env.PUBLIC_URL + '/profilePic/noFace.png',
+    chats: {}
 }});
   const [activeUser, setActiveUser] = useState('');
   const [credentials, setCredentials] = useState({a:"1"});

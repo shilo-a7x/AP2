@@ -1,12 +1,14 @@
 import './Chat.css'
 import { useState } from 'react';
 
-const ContactList = ({ user, currentChat, setCurrentChat }) => {
+const ContactList = ({ activeUser, currentChat, setCurrentChat }) => {
     const [contacts, setContacts] = useState([]);
+    console.log(activeUser.chats)
 
     return (
         <ol className="contacts-list">
-            {contacts.map(([chatID, chat]) => (
+            contact list
+            {Object.entries(activeUser.chats).map(([chatID, chat]) => (
                 <ul key={chatID}
                     className={(currentChat !== -1 && currentChat === chatID) ? "contactSelected" : "contact"}
                     onClick={() => {
@@ -15,7 +17,7 @@ const ContactList = ({ user, currentChat, setCurrentChat }) => {
                     <span className="user-header">
                         <span className="profile-pic">
                             <img
-                                src="media/profile_picture.png"
+                                src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
                                 className="center" alt="profile-pic" />
                         </span>
                         <span className="contact-info">
