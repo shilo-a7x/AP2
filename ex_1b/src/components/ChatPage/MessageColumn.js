@@ -2,20 +2,20 @@ import ChatMessages from "./ChatMessages";
 import './Chat.css';
 import { useEffect, useRef, useState } from "react";
 
-const MessageColumn = ({ user, setUser, currentChatID, messagesCache, setMessagesCache }) => {
+const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     
     const messageBox = useRef(null);
     // Set state for send button disabled state
     const [messageEmpty, setMessageEmpty] = useState(true);
 
-    const messagesLength = currentChatID !== -1 ? user.chats[currentChatID].messages.length : 0;
+    const messagesLength = currentChat !== -1 ? activeUser.chats[currentChat].messages.length : 0;
     const sendMessage = (message) => {
         // Add new message to current chat's messages
-        if (currentChatID !== -1) {
-            setUser({
-                ...user, chats: {
-                    ...user.chats, [currentChatID]: {
-                        ...user.chats[currentChatID], messages: [...user.chats[currentChatID].messages, message]
+        if (currentChat !== -1) {
+            setActiveUser({
+                ...activeUser, chats: {
+                    ...activeUser.chats, [currentChat]: {
+                        ...activeUser.chats[currentChat], messages: [...activeUser.chats[currentChat].messages, message]
                     }
                 }
             });
@@ -29,20 +29,29 @@ const MessageColumn = ({ user, setUser, currentChatID, messagesCache, setMessage
             const currentTime = new Date().toLocaleString('en-US', { hourCycle: 'h23' });
             // Create new message object
             const newMessage = {
-                id: user.chats[currentChatID].messages.length + 1, sent: true, content: message, created: currentTime,
+                id: activeUser.chats[currentChat].messages.length + 1, sent: true, content: message, time: currentTime,
             };
             sendMessage(newMessage);
             // Clear cache entry for the current chat
-            setMessagesCache(cache => {
-                cache[currentChatID] = "";
-                return cache;
-            });
+            // setMessagesCache(cache => {
+            //     cache[currentChat] = "";
+            //     return cache;
+            // });
 
             // Disable send button
             setMessageEmpty(true);
             messageBox.current.value = '';
             setInputHeight();
         }
+    };
+
+    const typing = () => {
+        setMessageEmpty(messageBox.current.value.length === 0);
+        setInputHeight();
+        // Store written message for current contact in cache
+        // setMessagesCache({
+        //     ...messagesCache, [currentChatID]: messageBox.current.value
+        // });
     };
 
     const setInputHeight = () => {
@@ -72,13 +81,14 @@ const MessageColumn = ({ user, setUser, currentChatID, messagesCache, setMessage
     const updateMessageBox = () => {
         if (messageBox.current) {
             // Set message box value to the message from cache
-            messageBox.current.value = messagesCache[currentChatID];
+            //messageBox.current.value = messagesCache[currentChat];
             setMessageEmpty(messageBox.current.value.length === 0);
         }
         setInputHeight();
     }
 
-    useEffect(updateMessageBox, [messagesCache, user, currentChatID]);
+    // add messagesCache
+    useEffect(updateMessageBox, [ activeUser, currentChat]);
 
     const scrollToBottom = () => {
         const messageBubbles = document.getElementsByClassName('message-bubble');
@@ -92,7 +102,7 @@ const MessageColumn = ({ user, setUser, currentChatID, messagesCache, setMessage
     useEffect(scrollToBottom, [messagesLength]);
 
     return (<>
-        {(currentChatID !== -1 && <>
+        {(currentChat !== -1 && <>
             <div className="chat-section-header">
                 <span className="user-header">
                     <span className="profile-pic">
@@ -102,14 +112,14 @@ const MessageColumn = ({ user, setUser, currentChatID, messagesCache, setMessage
                     </span>
                     <span className="user-header-title">
                         <div className="center">
-                            {user.chats[currentChatID].name}
+                            {activeUser.chats[currentChat].name}
                         </div>
                     </span>
                 </span>
             </div>
             <div className="chat-section-messages">
-                <ChatMessages user={user}
-                    currentChatID={currentChatID} />
+                <ChatMessages activeUser={activeUser}
+                    currentChat={currentChat} />
             </div>
             <div id="input-section">
                 <span className="chat-input">
