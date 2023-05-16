@@ -2,14 +2,16 @@ import "./Chat.css";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ContactColumn from "./ContactColumn";
+import MessageColumn from "./MessageColumn";
 
 const ChatPage = ({ activeUser, setActiveUser }) => {
     const [currentChat, setCurrentChat] = useState(-1);
     const navigate = useNavigate();
+    console.log(activeUser)
 
     const logout = () => {
         setActiveUser(null);
-        setCurrentChat(-1);
+        //setCurrentChat(-1);
         navigate("/");
     }
 
@@ -26,14 +28,12 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
             </div>
             <div className="right-panel">
                 <span>hello</span>
-                {/* <MessageColumn user={user}
-                    setUser={setUser}
-                    token={token}
-                    currentChatID={currentChatID}
-                    setCurrentChatID={setCurrentChatID}
-                    messagesCache={messagesCache}
-                    setMessagesCache={setMessagesCache}
-                    connection={connection} /> */}
+                <MessageColumn activeUser={activeUser}
+                    setActiveUser={setActiveUser}
+                    currentChat={currentChat}
+                    // messagesCache={messagesCache}
+                    // setMessagesCache={setMessagesCache}
+                 />
             </div>
         </div>
     </div>

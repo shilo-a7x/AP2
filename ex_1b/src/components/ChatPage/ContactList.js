@@ -1,9 +1,6 @@
 import './Chat.css'
-import { useState } from 'react';
 
 const ContactList = ({ activeUser, currentChat, setCurrentChat }) => {
-    const [contacts, setContacts] = useState([]);
-    console.log(activeUser.chats)
 
     return (
         <ol className="contacts-list">
