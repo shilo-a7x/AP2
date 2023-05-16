@@ -1,13 +1,9 @@
 import './Chat.css'
-import { useState } from 'react';
 
 const ContactList = ({ activeUser, currentChat, setCurrentChat }) => {
-    const [contacts, setContacts] = useState([]);
-    console.log(activeUser.chats)
 
     return (
         <ol className="contacts-list">
-            contact list
             {Object.entries(activeUser.chats).map(([chatID, chat]) => (
                 <ul key={chatID}
                     className={(currentChat !== -1 && currentChat === chatID) ? "contactSelected" : "contact"}
