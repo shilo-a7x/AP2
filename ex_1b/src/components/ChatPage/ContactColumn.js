@@ -11,6 +11,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
     }, [])
 
     const addContact = (e) => {
+        e.preventDefault();
         const newContactName = newContact.current.value;
 
         const contact = {
@@ -26,15 +27,9 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
             ...u,
             chats: { ...u.chats, [newContactName]: chat }
         }));
-        e.preventDefault();
+        newContact.current.value = "";
         document.getElementById("close-btn").click();
     }
-
-    // // Clear error message on change
-    // const clearUsernameError = () => {
-    //     document.getElementById("add-contact-input").classNameList.remove("is-invalid");
-    //     document.getElementById("add-contact-error").innerHTML = "";
-    // }
 
     return (
         <>
@@ -72,7 +67,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Contact Username</label>
                                     <input ref={newContact} type="text" className="form-control" id="name" placeholder="Enter name"
-                                        maxLength="15"></input>
+                                        maxLength="25"></input>
                                 </div>
                             </form>
                         </div>

@@ -10,23 +10,16 @@ const ContactList = ({ activeUser, currentChat, setCurrentChat }) => {
                     onClick={() => {
                         setCurrentChat(chatID);
                     }}>
-                    <span className="user-header">
-                        <span className="profile-pic">
-                            <img
-                                src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
-                                className="center" alt="profile-pic" />
-                        </span>
-                        <span className="contact-info">
-                            <div className="center">
-                                <h6 className="contact-name">
-                                    {chat.name}
-                                </h6>
-                                <h6 className="last-message-sent">
-                                    {(chat.messages.length) ? chat.messages.at(-1).content : ''}
-                                </h6>
-                            </div>
-                        </span>
-                    </span>
+                    <div className="info">
+                        <img
+                            src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
+                            className="contactPic" alt="profile-pic" />
+                        <span className="name">{chat.name}</span>
+                        <div className="lastMessage">
+                            <div className="last-message-date">23/04/2023 4:15 pm</div>
+                            <div className="last-message">{(chat.messages.length) ? chat.messages.at(-1).content : 'no message sent'}</div>
+                        </div>
+                    </div>
                 </ul>
             ))}
         </ol>
