@@ -9,6 +9,7 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
 
     const logout = () => {
         setActiveUser(null);
+        setCurrentChat(-1);
         navigate("/");
     }
 
@@ -21,7 +22,7 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
         <br></br>
         <div className="container">
             <div className="left-panel">
-                {<ContactColumn activeUser={activeUser} currentChat={currentChat} setCurrentChat={setCurrentChat} />}
+                {<ContactColumn setActiveUser={setActiveUser} activeUser={activeUser} currentChat={currentChat} setCurrentChat={setCurrentChat} />}
             </div>
             <div className="right-panel">
                 <span>hello</span>
