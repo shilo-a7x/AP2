@@ -8,14 +8,16 @@ import ChatPage from './components/ChatPage/ChatPage';
 
 
 function App() {
-  const [users, setUsers] = useState({a: {
-    nick: "admin",
-    profilePic: process.env.PUBLIC_URL + '/profilePic/noFace.png',
-    chats: {}
-}});
+  const [users, setUsers] = useState({
+    a: {
+      nick: "admin",
+      profilePic: process.env.PUBLIC_URL + '/profilePic/noFace.png',
+      chats: {}
+    }
+  });
   const [activeUser, setActiveUser] = useState('');
-  const [credentials, setCredentials] = useState({a:"1"});
-  
+  const [credentials, setCredentials] = useState({ a: "1" });
+
 
   return (
     <Router>
@@ -31,7 +33,7 @@ function App() {
             <Route path='/' element={
               // Render the Signin component.
               <>
-                <Login users={users} activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials}/>
+                <Login users={users} activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials} />
               </>
             } />
             <Route path='/ChatPage' element={
