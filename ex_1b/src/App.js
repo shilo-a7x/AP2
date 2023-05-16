@@ -8,7 +8,11 @@ import ChatPage from './components/ChatPage/ChatPage';
 
 
 function App() {
-  const [users, setUsers] = useState({});
+  const [users, setUsers] = useState({a: {
+    password: "1",
+    nick: "admin",
+    contacts: {}
+}});
   const [activeUser, setActiveUser] = useState('');
   const [credentials, setCredentials] = useState({a:"1"});
   
