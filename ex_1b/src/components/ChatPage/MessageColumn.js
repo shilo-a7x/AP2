@@ -25,10 +25,12 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
         const message = messageBox.current.value.trim();
         if (message.length > 0) {
             // Get current time in hh:mm format
-            const currentTime = new Date().toLocaleString('en-US', { hourCycle: 'h23' });
+            const time = new Date();
+            const currentTime = time.toLocaleString('en-US', { hourCycle: 'h23' });
+            const HMTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             // Create new message object
             const newMessage = {
-                id: activeUser.chats[currentChat].messages.length + 1, sent: true, content: message, time: currentTime,
+                id: activeUser.chats[currentChat].messages.length + 1, sent: true, content: message, time: currentTime, HMTime: HMTime
             };
             sendMessage(newMessage);
             // Clear cache entry for the current chat
@@ -54,7 +56,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     };
 
     const setInputHeight = () => {
-        let messageInput = document.getElementById("message-input");
+        let messageInput = document.getElementById("send-message-input");
         let inputSection = document.getElementById("input-section");
         if (!messageInput || !inputSection) {
             return;
@@ -87,7 +89,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     }
 
     // add messagesCache
-    useEffect(updateMessageBox, [ activeUser, currentChat]);
+    useEffect(updateMessageBox, [activeUser, currentChat]);
 
     const scrollToBottom = () => {
         const messageBubbles = document.getElementsByClassName('message-bubble');
@@ -110,19 +112,17 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
                             className="center" alt="profile pic" />
                     </span>
                     <span className="user-header-title">
-                        <div className="center">
+                        <div className="name">
                             {activeUser.chats[currentChat].name}
                         </div>
                     </span>
                 </span>
             </div>
-            <div className="chat-section-messages">
-                <ChatMessages activeUser={activeUser}
-                    currentChat={currentChat} />
-            </div>
+            <ChatMessages activeUser={activeUser}
+                currentChat={currentChat} />
             <div id="input-section">
-                <span className="chat-input">
-                    {(<textarea ref={messageBox} id="message-input" placeholder="Type a message..."
+                <span className="input-bar">
+                    {(<textarea ref={messageBox} id="send-message-input" placeholder="Type a message..." className="form-control"
                         onChange={typing}
                         onKeyDown={keyPressed} />) || <div className="center"><b>Recording...</b></div>}
 
