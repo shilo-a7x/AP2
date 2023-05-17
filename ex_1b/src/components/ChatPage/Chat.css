@@ -177,11 +177,12 @@ body {
 
 .contact-list::-webkit-scrollbar-thumb {
     background-color: #5e83ae;
-
+    border-radius: 10px;
 }
 
 .contact-list::-webkit-scrollbar-track {
     background-color: #b5d3ea;
+    border-radius: 10px;
 }
 
 .contact-info {
@@ -223,10 +224,12 @@ body {
 
 .chat::-webkit-scrollbar-thumb {
     background-color: #5e83ae;
+    border-radius: 10px;
 }
 
 .chat::-webkit-scrollbar-track {
     background-color: #b5d3ea;
+    border-radius: 10px;
 }
 
 .message {
@@ -238,6 +241,7 @@ body {
 }
 
 .message p {
+    white-space: pre-wrap;
     margin: 5px;
     padding-left: 8px;
     padding-right: 8px;
@@ -306,21 +310,40 @@ body {
     border-radius: 5px;
 }
 
+.input-bar textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.input-bar textarea::-webkit-scrollbar-thumb {
+    background-color: #84b2e6;
+    border-radius: 10px;
+}
+
+.input-bar textarea::-webkit-scrollbar-track {
+    background-color: #b5ccdd;
+    border-radius: 10px;
+}
+
 .send-button {
     background-color: #0084ff;
     color: #fff;
     border: none;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
 }
 
 #send-message-input{
-    padding-bottom: 20px;
-    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    line-height: 1;
 }
 
 .send-button:hover {
     background-color: #0073e6;
+}
+
+.input-bar textarea {
+    resize: none;
 }

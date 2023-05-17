@@ -34,7 +34,7 @@ function App() {
             <Route path='/' element={
               // Render the Signin component.
               <>
-                <Login users={users} activeUser={activeUser} setActiveUser={setActiveUser} credentials={credentials} />
+                <Login users={users} setActiveUser={setActiveUser} credentials={credentials} />
               </>
             } />
             <Route path='/ChatPage' element={

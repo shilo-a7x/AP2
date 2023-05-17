@@ -149,8 +149,6 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
     };
 
     const handleSignUp = (e) => {
-        // Validate username, password and display name
-        // If valid, create new user, sign him in and redirect to main page
 
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
