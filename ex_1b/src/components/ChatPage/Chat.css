@@ -63,6 +63,16 @@ body {
     height: 50px;
     border-radius: 50px;
     margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.user-header-title .name {
+    font-size: 25px;
+    font-weight: bold;
+    float: left;
+    padding-left: 15px;
+    margin-bottom: 25px;
 }
 
 .name {
@@ -83,7 +93,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 50px;
-    left: 540px;
+    left: 565px;
 }
 
 .modal-body form {
@@ -92,11 +102,6 @@ body {
 
 .modal-body {
     height: 32vh;
-}
-
-.contacts-list {
-    padding: 0px;
-    width: 200px;
 }
 
 .contact {
@@ -120,7 +125,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    margin-top: 8px;
+    margin-top: 15px;
 }
 
 .contact .info {
@@ -182,10 +187,8 @@ body {
 .contact-info {
     display: flex;
     align-items: center;
-    padding: 17px;
-    padding-top: 19px;
+    padding-top: 2px;
     padding-bottom: 0px;
-    border-bottom: 1px solid #ddd;
     background-color: aliceblue;
     border-radius: 0 10px 0 0;
 }
@@ -195,11 +198,23 @@ body {
     height: 55px;
     border-radius: 50%;
     margin-right: 10px;
+    margin-left: 20px;
+    margin-top: 15px;
 }
 
 .chat {
     flex: 1;
     overflow-y: scroll;
+    padding: 0px;
+}
+
+.chat-list{
+    padding: 10px;
+}
+
+.contacts-list {
+    padding: 0px;
+    width: 200px;
 }
 
 .chat::-webkit-scrollbar {
@@ -217,8 +232,7 @@ body {
 .message {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    margin: 10px;
+    padding: 7px;
     max-width: 70%;
     word-wrap: break-word;
 }
@@ -234,8 +248,10 @@ body {
 }
 
 .message.received {
+    position: relative;
     align-items: flex-end;
     margin-left: auto;
+    text-align: right;
 }
 
 .message.sent .text {
@@ -258,22 +274,15 @@ body {
 
 .received-text {
     background-color: #DCF8C6;
-    /* example background color */
     padding: 10px;
-    /* example padding */
     border-radius: 10px;
-    /* example border radius */
     display: inline-block;
-    /* to make the div only as wide as the content */
 }
 
 .received-time {
     font-size: 12px;
-    /* example font size */
     color: #777;
-    /* example color */
     margin-left: 10px;
-    /* example margin */
 }
 
 .message.received .date {
@@ -301,6 +310,11 @@ body {
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.send-message-input{
+    margin-bottom: 10px;
+    height: 140px;
 }
 
 .send-button:hover {
