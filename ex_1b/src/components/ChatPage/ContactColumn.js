@@ -31,6 +31,12 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
         document.getElementById("close-btn").click();
     }
 
+    const checkRegex = (e) => {
+        if (!/[a-zA-Z0-9-]$/.test(e.key)) {
+            e.preventDefault();
+        }
+    }
+
     return (
         <>
             <div className="left-panel">
@@ -47,7 +53,6 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                 </div>
                 <div class="contact-list">
                     <div className="contacts">
-
                         <ContactList activeUser={activeUser} currentChat={currentChat}
                             setCurrentChat={setCurrentChat} />
                     </div>
@@ -66,7 +71,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                             <form>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Contact Username</label>
-                                    <input ref={newContact} type="text" className="form-control" id="name" placeholder="Enter name"
+                                    <input ref={newContact} onKeyDown={checkRegex} type="text" className="form-control" id="name" placeholder="Enter name"
                                         maxLength="25"></input>
                                 </div>
                             </form>

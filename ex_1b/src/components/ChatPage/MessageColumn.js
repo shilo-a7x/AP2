@@ -3,7 +3,6 @@ import './Chat.css';
 import { useEffect, useRef, useState } from "react";
 
 const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
-    
     const messageBox = useRef(null);
     // Set state for send button disabled state
     const [messageEmpty, setMessageEmpty] = useState(true);

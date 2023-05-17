@@ -57,15 +57,11 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
     }
 
     // Prevent user from entering invalid characters
-    const enforceUsernameRegEx = (e) => {
-        document.getElementById("username").classList.remove("is-invalid");
-        document.getElementById("username").classList.remove("text-danger");
+    const checkUsernameRegex = (e) => {
         document.getElementById("usernameError").innerHTML = "";
 
         if (!/[a-zA-Z0-9-]$/.test(e.key)) {
             document.getElementById("usernameError").innerHTML = "Username must contain only letters and numbers";
-            document.getElementById("username").classList.add("is-invalid");
-            document.getElementById("usernameLabel").classList.add("text-danger");
             e.preventDefault();
         }
     }
@@ -115,14 +111,10 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
     }
 
     // Prevent user from entering invalid characters
-    const enforceDisplayNameRegEx = (e) => {
-        document.getElementById("displayName").classList.remove("is-invalid");
-        document.getElementById("displayName").classList.remove("text-danger");
+    const checkDisplayRegex = (e) => {
         document.getElementById("displayNameError").innerHTML = "";
 
         if (!/[a-zA-Z0-9-]$/.test(e.key)) {
-            document.getElementById("displayName").classList.add("is-invalid");
-            document.getElementById("displayNameLabel").classList.add("text-danger");
             document.getElementById("displayNameError").innerHTML = "Display name can only contain letters, spaces, hyphens, periods, dots, and commas";
             e.preventDefault();
         }
@@ -199,7 +191,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
             <div className="formField">
                 <label htmlFor="username" id="usernameLabel">Username:</label>
                 <input ref={usernameContainer} type="text" id="username" className="form-control" name="username"
-                    onKeyDown={enforceUsernameRegEx} onBlur={validateUsername} onFocusCapture={deleteUsernameError}
+                    onKeyDown={checkUsernameRegex} onBlur={validateUsername} onFocusCapture={deleteUsernameError}
                     maxLength="15" required />
                 <span className="errorMessage" id="usernameError"></span>
             </div>
@@ -228,7 +220,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
             <div className="formField">
                 <label htmlFor="displayName" id="displayNameLabel">Display name:</label>
                 <input ref={displayNameContainer} type="text" id="displayName" className="form-control" name="displayName"
-                    onKeyDown={enforceDisplayNameRegEx} onBlur={validateDisplayName} onFocusCapture={deleteDisplayNameError}
+                    onKeyDown={checkDisplayRegex} onBlur={validateDisplayName} onFocusCapture={deleteDisplayNameError}
                     maxLength="15" required />
                 <span className="errorMessage" id="displayNameError"></span>
             </div>

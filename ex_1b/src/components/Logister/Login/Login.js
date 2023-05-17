@@ -32,7 +32,7 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
     }
 
     // Prevent user from entering invalid characters
-    const enforceUsernameRegEx = (e) => {
+    const checkRegex = (e) => {
         if (!/[a-zA-Z0-9-]$/.test(e.key)) {
             e.preventDefault();
         }
@@ -55,7 +55,7 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
             <div className="form-group">
                 <label htmlFor="username" className="formContainerTitle" id="usernameLabel">Username:</label>
                 <input type="text" className="form-control" id="username" name="username" ref={usernameContainer}
-                    onChange={handleChange} onKeyDown={enforceUsernameRegEx} maxLength="15" required/>
+                    onChange={handleChange} onKeyDown={checkRegex} maxLength="15" required/>
             </div>
             <div className="form-group">
                 <label htmlFor="password" className="formContainerTitle" id="passwordLabel">Password:</label>
