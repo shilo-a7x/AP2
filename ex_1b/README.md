@@ -1,10 +1,9 @@
 # Ex1 part b
 
 ## Features
-- Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
-- Save message drafts when switching between contacts
-- Sort contacts by last message date and time
+- Registration page with 
 - Show password button
+- Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
 
 ## Installation
 ```shell
@@ -26,4 +25,4 @@ Visit http://localhost:3000/
 
 **Enjoy!**
 
-<img src="public/profilePic/grandpa.png" alt="like a mozzarella" height="250">
+![like a mozzarella](public/profilePic/grandpa.png)
