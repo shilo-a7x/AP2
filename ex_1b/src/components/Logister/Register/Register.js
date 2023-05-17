@@ -168,7 +168,6 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
         // Create new user
         const newUser = {
             [username]: {
-                //password: password,
                 nick: displayName,
                 profilePic: previewImage,
                 chats: {}
@@ -239,7 +238,7 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
                         <img
                             src={previewImage}
                             alt="Profile Picture"
-                            style={{ width: '100px', height: '100px', borderRadius: '50px' }}
+                            style={{ width: '100px', height: '100px', borderRadius: '50px'}}
                         />
                     )}
                 </div>

@@ -7,17 +7,12 @@ import MessageColumn from "./MessageColumn";
 const ChatPage = ({ activeUser, setActiveUser }) => {
     const [currentChat, setCurrentChat] = useState(-1);
     const navigate = useNavigate();
-    console.log(activeUser)
 
     const logout = () => {
         setActiveUser(null);
-        //setCurrentChat(-1);
+        setCurrentChat(-1);
         navigate("/");
     }
-
-    useEffect(() => {
-        console.log(activeUser);
-    })
 
     return (<div>
         <button type="button" className="Logout-button" onClick={logout}>Logout</button>
