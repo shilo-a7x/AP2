@@ -26,7 +26,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
         if (message.length > 0) {
             // Get current time in hh:mm format
             const time = new Date();
-            const currentTime = time.toLocaleString('en-US', { hourCycle: 'h23' });
+            const currentTime = time.toLocaleString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric',hour: '2-digit', minute: '2-digit' });
             const HMTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             // Create new message object
             const newMessage = {
