@@ -1,6 +1,9 @@
 body {
     background: linear-gradient(to bottom, #1e5799, #7db9e8);
 }
+img {
+    object-fit: cover;
+}
 
 form {
     background-color: aliceblue;

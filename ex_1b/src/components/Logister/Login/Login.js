@@ -7,9 +7,6 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
 
-    useEffect (() => {
-        console.log(activeUser)        
-    },[activeUser])
 
     const handleLogin = (e) => {
         // Validate username and password
@@ -49,6 +46,9 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
     const makeVisible = () => {
         setVisible(1 - isVisible)
     }
+    useEffect(() => {
+        console.log(activeUser);
+    })
 
     return (<div id="form-frame">
         <form onSubmit={handleLogin} method="post">

@@ -56,7 +56,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                         <i className="bi bi-person-plus"></i>
                     </button>
                 </div>
-                <div class="contact-list">
+                <div className="contact-list">
                     <div className="contacts">
                         <ContactList activeUser={activeUser} currentChat={currentChat}
                             setCurrentChat={setCurrentChat} />
