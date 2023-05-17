@@ -30,6 +30,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
                 id: activeUser.chats[currentChat].messages.length + 1, sent: true, content: message, time: currentTime, HMTime: HMTime
             };
             sendMessage(newMessage);
+            messageBox.current.scrollTop = 0;
             messageBox.current.value = '';
         }
     };
@@ -68,9 +69,10 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
             <ChatMessages activeUser={activeUser}
                 currentChat={currentChat} />
                 <span className="input-bar input-group-text">
-                    <textarea ref={messageBox} id="send-message-input" placeholder="Type a message..." className="form-control"
+                    <textarea ref={messageBox} id="send-message-input" placeholder="Type a message..."
+                        className="form-control" aria-label="With textarea"
                         onKeyDown={keyPressed} />
-                        <button className="center send-button" onClick={sendTextMessage}>
+                        <button className="center btn btn-primary send-button" onClick={sendTextMessage}>
                             <i className="bi bi-send"></i>
                         </button>
                 </span>
