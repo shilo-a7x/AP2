@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Register from "./components/Logister/Register/Register";
 import Login from "./components/Logister/Login/Login"
 import { useState } from 'react';
@@ -38,9 +39,11 @@ function App() {
             } />
             <Route path='/ChatPage' element={
               // Render the Signin component.
+              activeUser ?
               <>
                 <ChatPage activeUser={activeUser} setActiveUser={setActiveUser} />
-              </>
+              </> :
+              <Navigate to="/" />
             } />
           </Routes>
         </main>
