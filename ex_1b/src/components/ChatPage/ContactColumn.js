@@ -13,6 +13,11 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
     const addContact = (e) => {
         e.preventDefault();
         const newContactName = newContact.current.value;
+        if (activeUser.chats[newContactName]) {
+            newContact.current.value = "";
+            document.getElementById("close-btn").click();
+            return;
+        }
 
         const contact = {
             name: newContactName,
