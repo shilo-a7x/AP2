@@ -188,7 +188,7 @@ body {
     display: flex;
     align-items: center;
     padding-top: 2px;
-    padding-bottom: 0px;
+    padding-bottom: 22px;
     background-color: aliceblue;
     border-radius: 0 10px 0 0;
 }
