@@ -312,9 +312,9 @@ body {
     cursor: pointer;
 }
 
-.send-message-input{
-    margin-bottom: 10px;
-    height: 140px;
+#send-message-input{
+    padding-bottom: 20px;
+    height: 40px;
 }
 
 .send-button:hover {
