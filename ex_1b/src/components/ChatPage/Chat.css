@@ -177,11 +177,12 @@ body {
 
 .contact-list::-webkit-scrollbar-thumb {
     background-color: #5e83ae;
-
+    border-radius: 10px;
 }
 
 .contact-list::-webkit-scrollbar-track {
     background-color: #b5d3ea;
+    border-radius: 10px;
 }
 
 .contact-info {
@@ -223,10 +224,12 @@ body {
 
 .chat::-webkit-scrollbar-thumb {
     background-color: #5e83ae;
+    border-radius: 10px;
 }
 
 .chat::-webkit-scrollbar-track {
     background-color: #b5d3ea;
+    border-radius: 10px;
 }
 
 .message {
@@ -311,11 +314,13 @@ body {
 }
 
 .input-bar textarea::-webkit-scrollbar-thumb {
-    background-color: #5e83ae;
+    background-color: #84b2e6;
+    border-radius: 10px;
 }
 
 .input-bar textarea::-webkit-scrollbar-track {
-    background-color: #b5d3ea;
+    background-color: #b5ccdd;
+    border-radius: 10px;
 }
 
 .send-button {
