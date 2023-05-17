@@ -1,14 +1,10 @@
 import ContactList from "./ContactList";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import './Chat.css'
 
 
 const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat }) => {
     const newContact = useRef(null);
-
-    useEffect(() => {
-        console.log(activeUser)
-    }, [])
 
     const addContact = (e) => {
         e.preventDefault();

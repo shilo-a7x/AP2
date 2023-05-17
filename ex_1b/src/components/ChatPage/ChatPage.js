@@ -1,6 +1,6 @@
 import "./Chat.css";
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ContactColumn from "./ContactColumn";
 import MessageColumn from "./MessageColumn";
 

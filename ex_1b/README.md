@@ -1,9 +1,17 @@
 # Ex1 part b
 
 ## Features
-- Registration page with 
-- Show password button
-- Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
+- Registration page
+    - Username, password, display name and profile pic fields
+    - All fields required, with input restrictions
+- Login page
+    - Username and password authentication
+    - For testing, you may login with admin user (hard-coded in the app): Username: 'a', Password: '1'
+- Chat page
+    - Add contact button
+    - Chat saved when switching contacts
+    - Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
+    - Logout button - returns to login page and erase all chats
 
 ## Installation
 ```shell

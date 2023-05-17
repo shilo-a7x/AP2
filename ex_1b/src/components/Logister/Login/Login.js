@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../Logister.css";
 
-const Login = ({ users, activeUser, setActiveUser, credentials}) => {
+const Login = ({ users, setActiveUser, credentials}) => {
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
@@ -17,8 +17,6 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
 
         if (credentials[username] === password) {
             setActiveUser(users[username]);
-            console.log(activeUser);
-            console.log(username);
             navigate("/ChatPage");
         } else {
             document.getElementById("errorMessage").innerHTML = "username or password incorrect";
@@ -46,9 +44,6 @@ const Login = ({ users, activeUser, setActiveUser, credentials}) => {
     const makeVisible = () => {
         setVisible(1 - isVisible)
     }
-    useEffect(() => {
-        console.log(activeUser);
-    })
 
     return (<div id="form-frame">
         <form onSubmit={handleLogin} method="post">
