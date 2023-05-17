@@ -26,7 +26,7 @@ body {
 .container {
     display: flex;
     height: 87vh;
-    margin-left: 180px;
+    margin-left: 210px;
     margin-top: 2vh;
     margin-bottom: 7.7vh;
     border-radius: 10px;
@@ -39,7 +39,7 @@ body {
     background-color: #112e4f;
     padding: 4px;
     border-radius: 10px 0 0 10px;
-    width: 430px;
+    width: 413px;
 }
 
 .right-panel {
@@ -62,7 +62,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .name {
@@ -74,7 +74,7 @@ body {
 }
 
 .addContactButton {
-    position: relative;
+    position: absolute;
     background-color: #00d5ff;
     color: #002b03;
     border: none;
@@ -83,14 +83,16 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 50px;
-    left: 100px;
+    left: 540px;
 }
 
-.modal-body{
-    height: 35vh;
+.modal-body form {
+    margin-top: 15px;
 }
 
-
+.modal-body {
+    height: 32vh;
+}
 
 .contacts-list {
     padding: 0px;
@@ -99,8 +101,9 @@ body {
 
 .contact {
     cursor: pointer;
-    height: 70px;
+    height: 80px;
     padding: 0px;
+    width: 400px;
 }
 
 .contactSelected {
@@ -108,7 +111,8 @@ body {
     cursor: pointer;
     height: 80px;
     padding: 0px;
-    padding-left: 5px;
+    padding-left: 10px;
+    width: 400px;
 }
 
 .contactPic {
@@ -121,7 +125,7 @@ body {
 
 .contact .info {
     margin-left: 10px;
-    width: 400px;
+    width: 390px;
     height: 35px;
 }
 
@@ -135,22 +139,20 @@ body {
     font-size: 14px;
     color: #236c25;
     margin-top: 27px;
-    margin-left: 20px;
-    float: left;
     height: 40px;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    float: left;
 }
 
 .last-message-date {
-    font-size: 12px;
+    font-size: 11px;
     color: #0e9cee;
     float: right;
-    padding-top: 50px;
+    padding-top: 55px;
     position: absolute;
-    top: 0;
-    left: 0;
+    float: right;
+    padding-right: 10px;
+    
 }
 
 .contact:hover {
@@ -181,14 +183,16 @@ body {
     display: flex;
     align-items: center;
     padding: 17px;
+    padding-top: 19px;
+    padding-bottom: 0px;
     border-bottom: 1px solid #ddd;
     background-color: aliceblue;
     border-radius: 0 10px 0 0;
 }
 
 .contact-info img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     margin-right: 10px;
 }

@@ -3,7 +3,6 @@ import './Chat.css';
 import { useEffect, useRef, useState } from "react";
 
 const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
-    
     const messageBox = useRef(null);
     // Set state for send button disabled state
     const [messageEmpty, setMessageEmpty] = useState(true);
@@ -104,7 +103,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     return (<>
         {(currentChat !== -1 && <>
             <div className="chat-section-header">
-                <span className="user-header">
+                <span className="contact-info">
                     <span className="profile">
                         <img
                             src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}

@@ -15,7 +15,7 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
         navigate("/");
     }
 
-    useEffect (() => {
+    useEffect(() => {
         console.log(activeUser);
     })
 
@@ -27,13 +27,10 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
                 {<ContactColumn setActiveUser={setActiveUser} activeUser={activeUser} currentChat={currentChat} setCurrentChat={setCurrentChat} />}
             </div>
             <div className="right-panel">
-                <span>hello</span>
                 <MessageColumn activeUser={activeUser}
                     setActiveUser={setActiveUser}
                     currentChat={currentChat}
-                    // messagesCache={messagesCache}
-                    // setMessagesCache={setMessagesCache}
-                 />
+                />
             </div>
         </div>
     </div>
