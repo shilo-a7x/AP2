@@ -73,7 +73,7 @@ const ContactColumn = ({ setActiveUser, activeUser, currentChat, setCurrentChat 
                                 aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <form>
+                            <form onSubmit={addContact}>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Contact Username</label>
                                     <input ref={newContact} onKeyDown={checkRegex} type="text" className="form-control" id="name" placeholder="Enter name"
