@@ -33,11 +33,6 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
                 id: activeUser.chats[currentChat].messages.length + 1, sent: true, content: message, time: currentTime, HMTime: HMTime
             };
             sendMessage(newMessage);
-            // Clear cache entry for the current chat
-            // setMessagesCache(cache => {
-            //     cache[currentChat] = "";
-            //     return cache;
-            // });
 
             // Disable send button
             setMessageEmpty(true);
@@ -49,23 +44,19 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     const typing = () => {
         setMessageEmpty(messageBox.current.value.length === 0);
         setInputHeight();
-        // Store written message for current contact in cache
-        // setMessagesCache({
-        //     ...messagesCache, [currentChatID]: messageBox.current.value
-        // });
     };
 
     const setInputHeight = () => {
         let messageInput = document.getElementById("send-message-input");
-        let inputSection = document.getElementById("input-section");
-        if (!messageInput || !inputSection) {
+        let inputBar = document.getElementById("input-bar");
+        if (!messageInput || !inputBar) {
             return;
         }
         // This might seem bizarre, but it's necessary to set the height of the input section
         let optimalHeight;
         do {
             optimalHeight = messageInput.scrollHeight;
-            inputSection.style.height = Math.max(messageInput.scrollHeight + 10, 50) + "px";
+            inputBar.style.height = Math.max(messageInput.scrollHeight + 10, 50) + "px";
         } while (messageInput.scrollHeight !== optimalHeight);
     };
 
@@ -81,8 +72,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
 
     const updateMessageBox = () => {
         if (messageBox.current) {
-            // Set message box value to the message from cache
-            //messageBox.current.value = messagesCache[currentChat];
+            // Set message box value to the message from cache;
             setMessageEmpty(messageBox.current.value.length === 0);
         }
         setInputHeight();
@@ -92,7 +82,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     useEffect(updateMessageBox, [activeUser, currentChat]);
 
     const scrollToBottom = () => {
-        const messageBubbles = document.getElementsByClassName('message-bubble');
+        const messageBubbles = document.getElementsByClassName('message');
         // If there are messages
         if (messageBubbles.length > 0) {
             messageBubbles[messageBubbles.length - 1].scrollIntoView();
@@ -104,37 +94,25 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
 
     return (<>
         {(currentChat !== -1 && <>
-            <div className="chat-section-header">
-                <span className="contact-info">
-                    <span className="profile">
+                <div className="contact-info">
                         <img
                             src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
-                            className="center" alt="profile pic" />
-                    </span>
-                    <span className="user-header-title">
-                        <div className="name">
+                             alt="profile pic" />
+                        <p className="name">
                             {activeUser.chats[currentChat].name}
-                        </div>
-                    </span>
-                </span>
-            </div>
+                        </p>
+                </div>
             <ChatMessages activeUser={activeUser}
                 currentChat={currentChat} />
-            <div id="input-section">
                 <span className="input-bar">
-                    {(<textarea ref={messageBox} id="send-message-input" placeholder="Type a message..." className="form-control"
+                    <input ref={messageBox} id="send-message-input" placeholder="Type a message..." className="form-control"
                         onChange={typing}
-                        onKeyDown={keyPressed} />) || <div className="center"><b>Recording...</b></div>}
-
-                </span>
-                <span className="buttons">
+                        onKeyDown={keyPressed} />
                     {!messageEmpty &&
-
                         <button className="center icon-button" onClick={sendTextMessage}>
                             <i className="bi bi-send" />
                         </button>}
                 </span>
-            </div>
         </>) || <div className="max">
                 <div className="welcome center">
                     Select a contact to start messaging...

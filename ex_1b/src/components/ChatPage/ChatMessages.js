@@ -2,7 +2,7 @@ import './Chat.css'
 
 const ChatMessages = ({ activeUser, currentChat }) => {
     return (
-        <ol className="chat">   
+        <ol className="chat"> 
             {activeUser.chats[currentChat].messages.map((message) => (
                 <ul key={message.id} className="chat-list">
                     <div className={message.sent ? "message sent" : "message received"}>
