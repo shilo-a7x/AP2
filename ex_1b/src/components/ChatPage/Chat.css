@@ -306,6 +306,18 @@ body {
     border-radius: 5px;
 }
 
+.input-bar textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.input-bar textarea::-webkit-scrollbar-thumb {
+    background-color: #5e83ae;
+}
+
+.input-bar textarea::-webkit-scrollbar-track {
+    background-color: #b5d3ea;
+}
+
 .send-button {
     background-color: #0084ff;
     color: #fff;
@@ -323,4 +335,8 @@ body {
 
 .send-button:hover {
     background-color: #0073e6;
+}
+
+textarea {
+    resize: none;
 }
