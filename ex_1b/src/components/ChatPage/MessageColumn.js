@@ -103,7 +103,7 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     return (<>
         {(currentChat !== -1 && <>
             <div className="chat-section-header">
-                <span className="user-header">
+                <span className="contact-info">
                     <span className="profile">
                         <img
                             src={process.env.PUBLIC_URL + '/profilePic/noFace.png'}
