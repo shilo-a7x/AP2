@@ -108,10 +108,9 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
                     <input ref={messageBox} id="send-message-input" placeholder="Type a message..." className="form-control"
                         onChange={typing}
                         onKeyDown={keyPressed} />
-                    {!messageEmpty &&
-                        <button className="center icon-button" onClick={sendTextMessage}>
-                            <i className="bi bi-send" />
-                        </button>}
+                        <button className="center send-button" onClick={sendTextMessage}>
+                            {/* <i className="bi bi-send" /> */}Send
+                        </button>
                 </span>
         </>) || <div className="max">
                 <div className="welcome center">
