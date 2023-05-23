@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #1e5799, #7db9e8);
+}
+
+.Logout-button {
+    background-color: #ff0000;
+    color: #f6e8e8;
+    float: right;
+    margin-right: 5px;
+    border: none;
+    border-radius: 8px;
+    padding: 2px;
+    margin-top: 5px;
+}
+
+.Logout-button:hover {
+    background-color: #cc0e0e;
+}
+
+.container {
+    display: flex;
+    height: 87vh;
+    margin-left: 210px;
+    margin-top: 2vh;
+    margin-bottom: 7.7vh;
+    border-radius: 10px;
+}
+
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #112e4f;
+    padding: 4px;
+    border-radius: 10px 0 0 10px;
+    width: 413px;
+}
+
+.right-panel {
+    flex: 3;
+    background-color: #FFF2CC;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 10px 10px 0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: aliceblue;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.user-header-title .name {
+    font-size: 25px;
+    font-weight: bold;
+    float: left;
+    padding-left: 15px;
+    margin-bottom: 25px;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.addContactButton {
+    position: absolute;
+    background-color: #00d5ff;
+    color: #002b03;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50px;
+    left: 565px;
+}
+
+.modal-body form {
+    margin-top: 15px;
+}
+
+.modal-body {
+    height: 32vh;
+}
+
+.contact {
+    cursor: pointer;
+    height: 80px;
+    padding: 0px;
+    width: 400px;
+}
+
+.contactSelected {
+    background-color: #ccc;
+    cursor: pointer;
+    height: 80px;
+    padding: 0px;
+    padding-left: 10px;
+    width: 400px;
+}
+
+.contactPic {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+.contact .info {
+    margin-left: 10px;
+    width: 390px;
+    height: 35px;
+}
+
+.lastMessage {
+    position: relative;
+    float: right;
+    width: 140px;
+}
+
+.last-message {
+    font-size: 14px;
+    color: #236c25;
+    margin-top: 27px;
+    height: 40px;
+    position: relative;
+    float: left;
+}
+
+.last-message-date {
+    font-size: 11px;
+    color: #0e9cee;
+    float: right;
+    padding-top: 55px;
+    position: absolute;
+    float: right;
+    padding-right: 10px;
+    
+}
+
+.contact:hover {
+    background-color: #dddddd;
+}
+
+.contact-list {
+    overflow-y: scroll;
+    height: calc(85vh - 100px);
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.contact-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.contact-list::-webkit-scrollbar-thumb {
+    background-color: #5e83ae;
+    border-radius: 10px;
+}
+
+.contact-list::-webkit-scrollbar-track {
+    background-color: #b5d3ea;
+    border-radius: 10px;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+    padding-bottom: 22px;
+    background-color: aliceblue;
+    border-radius: 0 10px 0 0;
+}
+
+.contact-info img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.chat {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 0px;
+}
+
+.chat-list{
+    padding: 10px;
+}
+
+.contacts-list {
+    padding: 0px;
+    width: 200px;
+}
+
+.chat::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat::-webkit-scrollbar-thumb {
+    background-color: #5e83ae;
+    border-radius: 10px;
+}
+
+.chat::-webkit-scrollbar-track {
+    background-color: #b5d3ea;
+    border-radius: 10px;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.message p {
+    white-space: pre-wrap;
+    margin: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.message.sent {
+    align-items: flex-start;
+}
+
+.message.received {
+    position: relative;
+    align-items: flex-end;
+    margin-left: auto;
+    text-align: right;
+}
+
+.message.sent .text {
+    color: aliceblue;
+    background-color: #0084ff;
+    border-radius: 8px 8px 8px 0;
+    max-width: 100%;
+    text-align: left;
+}
+
+.message.received .text {
+    background-color: #ddd;
+    color: #000;
+    margin-left: auto;
+    border-radius: 8px 8px 0 8px;
+    max-width: 100%;
+    text-align: left;
+}
+
+.message.sent .date {
+    text-align: left;
+    text-size-adjust: 14px;
+}
+
+.received-text {
+    background-color: #DCF8C6;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.received-time {
+    font-size: 12px;
+    color: #777;
+    margin-left: 10px;
+}
+
+.message.received .date {
+    text-align: right;
+}
+
+.input-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.input-bar input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-bar textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.input-bar textarea::-webkit-scrollbar-thumb {
+    background-color: #84b2e6;
+    border-radius: 10px;
+}
+
+.input-bar textarea::-webkit-scrollbar-track {
+    background-color: #b5ccdd;
+    border-radius: 10px;
+}
+
+.send-button {
+    background-color: #0084ff;
+    color: #fff;
+    border: none;
+    /* padding: 10px; */
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#send-message-input{
+    padding-top: 10px;
+    padding-bottom: 0px;
+    line-height: 1;
+}
+
+.send-button:hover {
+    background-color: #0073e6;
+}
+
+.input-bar textarea {
+    resize: none;
+}
