@@ -38,7 +38,7 @@ input[type="password"] {
 }
 
 .logister-btn {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -56,11 +56,11 @@ input[type="password"] {
     margin-bottom: 17.5vh;
 }
 
-.form-group>.show-password-button {
+.form-group > .show-password-button {
     position: relative;
     bottom: 0px;
     left: calc(100%-100px);
-    font: 300 16px 'Lato', sans-serif;
+    font: 300 16px "Lato", sans-serif;
     color: var(--form-help);
     background-color: transparent;
     padding: 0 5px 0 5px;

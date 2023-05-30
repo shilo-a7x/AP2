@@ -44,7 +44,7 @@ body {
 
 .right-panel {
     flex: 3;
-    background-color: #FFF2CC;
+    background-color: #fff2cc;
     width: 30px;
     display: flex;
     flex-direction: column;
@@ -157,7 +157,6 @@ body {
     position: absolute;
     float: right;
     padding-right: 10px;
-    
 }
 
 .contact:hover {
@@ -209,7 +208,7 @@ body {
     padding: 0px;
 }
 
-.chat-list{
+.chat-list {
     padding: 10px;
 }
 
@@ -281,7 +280,7 @@ body {
 }
 
 .received-text {
-    background-color: #DCF8C6;
+    background-color: #dcf8c6;
     padding: 10px;
     border-radius: 10px;
     display: inline-block;
@@ -334,7 +333,7 @@ body {
     cursor: pointer;
 }
 
-#send-message-input{
+#send-message-input {
     padding-top: 10px;
     padding-bottom: 0px;
     line-height: 1;
