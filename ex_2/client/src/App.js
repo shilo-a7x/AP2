@@ -46,6 +46,7 @@ function App() {
                                         users={users}
                                         setActiveUser={setActiveUser}
                                         credentials={credentials}
+                                        setToken={setToken}
                                     />
                                 </>
                             }
