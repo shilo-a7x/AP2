@@ -157,32 +157,34 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
     };
 
     const handleSignUp = async (e) => {
+        e.preventDefault();
+
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
         const displayName = displayNameContainer.current.value;
-        if (credentials[username]) {
-            document.getElementById("usernameError").innerHTML =
-                "Username is already taken";
-            document.getElementById("username").classList.add("is-invalid");
-            document
-                .getElementById("usernameLabel")
-                .classList.add("text-danger");
-            setUsernameFieldValid(false);
-            e.preventDefault();
-            return;
-        }
+        // if (credentials[username]) {
+        //     document.getElementById("usernameError").innerHTML =
+        //         "Username is already taken";
+        //     document.getElementById("username").classList.add("is-invalid");
+        //     document
+        //         .getElementById("usernameLabel")
+        //         .classList.add("text-danger");
+        //     setUsernameFieldValid(false);
+        //     e.preventDefault();
+        //     return;
+        // }
 
-        setCredentials({ ...credentials, [username]: password });
-        // Create new user
-        const newUser = {
-            [username]: {
-                nick: displayName,
-                profilePic: previewImage,
-                chats: {},
-            },
-        };
+        // setCredentials({ ...credentials, [username]: password });
+        // // Create new user
+        // const newUser = {
+        //     [username]: {
+        //         nick: displayName,
+        //         profilePic: previewImage,
+        //         chats: {},
+        //     },
+        // };
 
-        setUsers({ ...users, ...newUser });
+        // setUsers({ ...users, ...newUser });
 
         // server implementation
         const user = {
@@ -192,9 +194,20 @@ const Register = ({ users, setUsers, credentials, setCredentials }) => {
             profilePic: previewImage,
         };
 
-        const response = Network.register(user);
-
-        e.preventDefault();
+        const response = await Network.register(user);
+        if (response.status == 409) {
+            document.getElementById("usernameError").innerHTML =
+                "Username is already taken";
+            document.getElementById("username").classList.add("is-invalid");
+            document
+                .getElementById("usernameLabel")
+                .classList.add("text-danger");
+            setUsernameFieldValid(false);
+            return;
+        } else if (!response.ok) {
+            alert("Server failed! Please reload");
+            return;
+        }
         navigate("/");
     };
 

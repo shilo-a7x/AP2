@@ -1,6 +1,6 @@
 import ChatMessages from "./ChatMessages";
 import "./Chat.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
     const messageBox = useRef(null);

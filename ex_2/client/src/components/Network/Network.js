@@ -2,8 +2,8 @@ const server = "localhost";
 const port = 5000;
 const urlPrefix = "http://" + server + ":" + port + "/api";
 
-const Network = () => {
-    const register = async (user) => {
+const Network = {
+    async register(user) {
         const request = {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -11,7 +11,7 @@ const Network = () => {
         };
         const res = await fetch(urlPrefix + "/Users", request);
         return res;
-    };
+    },
 };
 
 export default Network;
