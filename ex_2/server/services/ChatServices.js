@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { User, Chat, Message } = require('../models/Schemas');
+const Chat = require('../models/Chat');
+const User = require('../models/User');
+const Message = require('../models/Message');
 
 exports.createChat = async (req, res) => {
     const {username} = req.body;

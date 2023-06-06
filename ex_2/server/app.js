@@ -1,11 +1,10 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
 const bodyParser = require('body-parser');
 const { mongoose } = require('mongoose');
 const app = express();
 const cors = require('cors');
-const chatRoutes = require('./routes/Routes');
-const { Counter } = require('./models/Schemas');
+const routes = require('./routes/Routes');
+const { Counter } = require('./models/Counter');
 const path = require('path');
 
 require('dotenv').config();
@@ -14,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const initializeDatabase = async () => {
+const startCounter = async () => {
     try {
         // Check if counter exists
         const counter = await Counter.findById('chatCounter');
@@ -36,7 +35,7 @@ const initializeDatabase = async () => {
 mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
-        initializeDatabase();
+        startCounter();
     })
     .catch(err => console.error('Could not connect to MongoDB', err));
 
@@ -52,9 +51,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../AP2_EX2/build', 'index.html'));
 });
 
-
-
-// Start server
+// Server runs on port 5000
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
