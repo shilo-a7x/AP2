@@ -20,7 +20,7 @@ const startCounter = async () => {
 
         // If not, create it
         if (!counter) {
-            const chatCounter = new Counter({ _id: 'chatCounter' });
+            const chatCounter = new Counter({ counterName: 'chatCounter' });
             await chatCounter.save();
             console.log("Chat counter has been initialized.");
         } else {
