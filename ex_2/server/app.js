@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const startCounter = async () => {
+const initCounter = async () => {
     try {
         // Check if counter exists
         const counter = await Counter.findById('chatCounter');
@@ -22,9 +22,9 @@ const startCounter = async () => {
         if (!counter) {
             const chatCounter = new Counter({ counterName: 'chatCounter' });
             await chatCounter.save();
-            console.log("Chat counter has been initialized.");
+            console.log("Chat counter has been created.");
         } else {
-            console.log("Chat counter already exists.");
+            console.log("Chat counter already initialized.");
         }
     } catch (err) {
         console.error("Error initializing database:", err);
@@ -35,13 +35,12 @@ const startCounter = async () => {
 mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
-        startCounter();
+        initCounter();
     })
     .catch(err => console.error('Could not connect to MongoDB', err));
 
 // Routes
 app.use("/api", routes);
-
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../AP2_EX2/build')));

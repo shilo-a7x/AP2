@@ -1,19 +1,19 @@
-const { createUser, authenticateUser, getUser } = require('../services/LogisterServices');
-const { createChat, getContactList, getChat, createMessage, getMessages, deleteChat } = require('../services/ChatServices');
+const { addUser, verifyUser, getUser } = require('../services/LogisterServices');
+const { createChat, getContacts, getChat, sendMessage, getAllMessages, deleteChat } = require('../services/ChatServices');
 const { createChat } = require("../services/ChatServices");
 
 
-exports.createUser = async (req, res) => {
+exports.addUser = async (req, res) => {
     try {
-        await createUser(req, res);
+        await addUser(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-exports.authenticateUser = async (req, res) => {
+exports.verifyUser = async (req, res) => {
     try {
-        await authenticateUser(req, res);
+        await verifyUser(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -36,9 +36,9 @@ exports.createChat = async (req, res) => {
     }
 };
 
-exports.getContactList = async (req, res) => {
+exports.getContacts = async (req, res) => {
     try {
-        await getContactList(req, res);
+        await getContacts(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -52,17 +52,17 @@ exports.getChat = async (req, res) => {
     }
 };
 
-exports.createMessage = async (req, res) => {
+exports.sendMessage = async (req, res) => {
     try {
-        await createMessage(req, res);
+        await sendMessage(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-exports.getMessages = async (req, res) => {
+exports.getAllMessages = async (req, res) => {
     try {
-        await getMessages(req, res);
+        await getAllMessages(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
