@@ -4,38 +4,38 @@ const { mongoose } = require('mongoose');
 const app = express();
 const cors = require('cors');
 const routes = require('./routes/Routes');
-const { Counter } = require('./models/Counter');
+// const { Counter } = require('./models/Counter');
 const path = require('path');
 
-require('dotenv').config();
+
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
 
-const initCounter = async () => {
-    try {
-        // Check if counter exists
-        const counter = await Counter.findById('chatCounter');
+// const initCounter = async () => {
+//     try {
+//         // Check if counter exists
+//         const counter = await Counter.findById('chatCounter');
 
-        // If not, create it
-        if (!counter) {
-            const chatCounter = new Counter({ counterName: 'chatCounter' });
-            await chatCounter.save();
-            console.log("Chat counter has been created.");
-        } else {
-            console.log("Chat counter already initialized.");
-        }
-    } catch (err) {
-        console.error("Error initializing database:", err);
-    }
-}
+//         // If not, create it
+//         if (!counter) {
+//             const chatCounter = new Counter({ counterName: 'chatCounter' });
+//             await chatCounter.save();
+//             console.log("Chat counter has been created.");
+//         } else {
+//             console.log("Chat counter already initialized.");
+//         }
+//     } catch (err) {
+//         console.error("Error initializing database:", err);
+//     }
+// }
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://127.0.0.1:27017/chats', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
-        initCounter();
+        //initCounter();
     })
     .catch(err => console.error('Could not connect to MongoDB', err));
 
@@ -43,11 +43,11 @@ mongoose.connect('mongodb://127.0.0.1:27017', { useNewUrlParser: true, useUnifie
 app.use("/api", routes);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../AP2_EX2/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../AP2_EX2/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Server runs on port 5000

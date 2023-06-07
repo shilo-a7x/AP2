@@ -1,24 +1,5 @@
-const User = require("../models/User");
-
-const register = async (user) => {
-    try {
-        const newUser = {
-            username: user.username,
-            password: user.password,
-            displayName: user.displayName,
-            profilePic: user.profilePic
-        }
-        const response = await new User(newUser).save();
-        return response;
-    }
-    catch (error) {
-        console.log(`Could not  ${error}`)
-    }
-}
-
-module.exports = { register };
-
-const {User} = require('../models/User');
+const { log } = require('console');
+const { User } = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 exports.createUser = async (req, res) => {
@@ -41,16 +22,15 @@ exports.createUser = async (req, res) => {
     }
 };
 
-exports.authenticateUser = async (req, res) => {
-    const { username, password } = req.body;
-
+exports.verifyUser = async (req, res) => {
+    const { userName: username, password } = req.body;
     try {
-        const user = await User.findOne({ username });
-        if (!user || !user.comparePassword(password)) {
+        const user = await User.findOne({ username, password });
+        if (!user) {
             return res.status(400).json({ message: 'Invalid username or password.' });
         }
         const token = jwt.sign({ userId: user._id }, 'hello', { expiresIn: '10000h' }); // Replace 'secret' with your actual secret
-        res.status(200).json({ token });
+        res.status(200).send(token);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

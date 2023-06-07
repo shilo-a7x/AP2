@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Counter = require("../models/Counter")
 const Schema = mongoose.Schema;
 
 const chatSchema = Schema(
@@ -20,20 +19,20 @@ const chatSchema = Schema(
     }
 )
 
-ChatSchema.pre('save', async function(next) {
-    try {
-        let counter = await Counter.findById('chatCounter');
-        if (!counter) {
-            counter = new Counter({_id: 'chatCounter'});
-        }
-        counter.count++;
-        await counter.save();
-        this.id = counter.count;
-        this._id = counter.count;
-        next();
-    } catch(err) {
-        next(err);
-    }
-});
+// chatSchema.pre('save', async function(next) {
+//     try {
+//         let counter = await Counter.findById('chatCounter');
+//         if (!counter) {
+//             counter = new Counter({_id: 'chatCounter'});
+//         }
+//         counter.count++;
+//         await counter.save();
+//         this.id = counter.count;
+//         this._id = counter.count;
+//         next();
+//     } catch(err) {
+//         next(err);
+//     }
+// });
 
-module.exports = Chat = mongoose.model("Chat", chatSchema);
+module.exports = { Chat: mongoose.model("Chat", chatSchema) };
