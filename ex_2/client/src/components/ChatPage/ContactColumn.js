@@ -3,6 +3,7 @@ import { useRef } from "react";
 import "./Chat.css";
 
 const ContactColumn = ({
+    token,
     setActiveUser,
     activeUser,
     currentChat,

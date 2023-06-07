@@ -16,7 +16,6 @@ function App() {
     });
     const [token, setToken] = useState(null);
     const [activeUser, setActiveUser] = useState("");
-    const [credentials, setCredentials] = useState({ a: "1" });
 
     return (
         <Router>
@@ -28,12 +27,7 @@ function App() {
                             element={
                                 // Render the Signup component.
                                 <>
-                                    <Register
-                                        users={users}
-                                        setUsers={setUsers}
-                                        credentials={credentials}
-                                        setCredentials={setCredentials}
-                                    />
+                                    <Register />
                                 </>
                             }
                         />
@@ -43,9 +37,7 @@ function App() {
                                 // Render the Signin component.
                                 <>
                                     <Login
-                                        users={users}
                                         setActiveUser={setActiveUser}
-                                        credentials={credentials}
                                         setToken={setToken}
                                     />
                                 </>
@@ -55,9 +47,11 @@ function App() {
                             path="/ChatPage"
                             element={
                                 // Render the Signin component.
-                                activeUser ? (
+                                activeUser && token ? (
                                     <>
                                         <ChatPage
+                                            token={token}
+                                            setToken={setToken}
                                             activeUser={activeUser}
                                             setActiveUser={setActiveUser}
                                         />

@@ -4,11 +4,12 @@ import { useState } from "react";
 import ContactColumn from "./ContactColumn";
 import MessageColumn from "./MessageColumn";
 
-const ChatPage = ({ activeUser, setActiveUser }) => {
+const ChatPage = ({ token, setToken, activeUser, setActiveUser }) => {
     const [currentChat, setCurrentChat] = useState(-1);
     const navigate = useNavigate();
 
     const logout = () => {
+        setToken(null);
         setActiveUser(null);
         setCurrentChat(-1);
         navigate("/");
@@ -24,6 +25,7 @@ const ChatPage = ({ activeUser, setActiveUser }) => {
                 <div className="left-panel">
                     {
                         <ContactColumn
+                            token={token}
                             setActiveUser={setActiveUser}
                             activeUser={activeUser}
                             currentChat={currentChat}
