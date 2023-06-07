@@ -1,11 +1,10 @@
-const { addUser, verifyUser, getUser } = require('../services/LogisterServices');
+const { createUser, verifyUser, getUser } = require('../services/LogisterServices');
 const { createChat, getContacts, getChat, sendMessage, getAllMessages, deleteChat } = require('../services/ChatServices');
-const { createChat } = require("../services/ChatServices");
 
 
-exports.addUser = async (req, res) => {
+exports.createUser = async (req, res) => {
     try {
-        await addUser(req, res);
+        await createUser(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

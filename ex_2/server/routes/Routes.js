@@ -9,7 +9,7 @@ router.get('/Chats/:id', controller.getChat);
 router.post('/Chats/:id/Messages', controller.sendMessage);
 router.get('/Chats/:id/Messages', controller.getAllMessages);
 router.delete('/Chats/:id',controller.deleteChat);
-router.post('/Users', controller.addUser);
+router.post('/Users', controller.createUser);
 router.post('/Tokens', controller.verifyUser);
 router.get('/Users/:username', controller.getUser);
 

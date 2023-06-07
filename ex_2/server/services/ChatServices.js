@@ -6,8 +6,7 @@ const Message = require('../models/Message');
 exports.createChat = async (req, res) => {
     const {username} = req.body;
     const token = req.headers.authorization.split(' ')[1];
-    const parsedToken = JSON.parse(token).token;
-    const decodedToken = jwt.verify(parsedToken, 'hello'); // Replace 'secret' with your actual secret
+    const decodedToken = jwt.verify(token, 'hello'); // Replace 'secret' with your actual secret
     const userId = decodedToken.userId;
 
     try {
@@ -32,10 +31,9 @@ exports.createChat = async (req, res) => {
     }
 };
 
-exports.getContactList = async (req, res) => {
+exports.getContacts = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
-    const parsedToken = JSON.parse(token).token;
-    const decodedToken = jwt.verify(parsedToken, 'hello'); // Replace 'secret' with your actual secret
+    const decodedToken = jwt.verify(token, 'hello'); // Replace 'secret' with your actual secret
     const userId = decodedToken.userId;
 
     try {
@@ -49,7 +47,7 @@ exports.getContactList = async (req, res) => {
                     select: 'username displayName profilePic'
                 }
             });
-
+            
         for (let chat of chats) {
             let otherUser = chat.users.find(user => user._id.toString() !== userId.toString());
             let lastMessage = null;
@@ -94,8 +92,7 @@ exports.createMessage = async (req, res) => {
     const chatId = req.params.id;
     const msg = req.body.msg;
     const token = req.headers.authorization.split(' ')[1];
-    const parsedToken = JSON.parse(token).token;
-    const decodedToken = jwt.verify(parsedToken, 'hello'); // Replace 'secret' with your actual secret
+    const decodedToken = jwt.verify(token, 'hello'); // Replace 'secret' with your actual secret
     const userId = decodedToken.userId;
 
     try {
