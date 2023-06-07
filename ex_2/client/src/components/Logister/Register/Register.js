@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Network from "../../Network/Network";
 import "../Logister.css";
 
-const Register = ({ users, setUsers, credentials, setCredentials }) => {
+const Register = () => {
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const confirmPasswordContainer = useRef(null);

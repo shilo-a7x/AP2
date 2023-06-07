@@ -1,29 +1,37 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Network from "../../Network/Network";
 import "../Logister.css";
 
-const Login = ({ users, setActiveUser, credentials }) => {
+const Login = ({ setActiveUser, setToken }) => {
     const usernameContainer = useRef(null);
     const passwordContainer = useRef(null);
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         // Validate username and password
         // If valid, sign in user and redirect to main page
+        e.preventDefault();
 
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
 
-        if (credentials[username] === password) {
-            setActiveUser(users[username]);
+        // if (credentials[username] === password) {
+        //     setActiveUser(users[username]);
+        //     navigate("/ChatPage");
+        // } else {
+        //     document.getElementById("errorMessage").innerHTML =
+        //         "username or password incorrect";
+        // }
+
+        const user = await Network.login(username, password, setToken);
+        if (user) {
+            setActiveUser(user);
             navigate("/ChatPage");
         } else {
             document.getElementById("errorMessage").innerHTML =
-                "username or password incorrect";
+                "Username or password incorrect";
         }
-
-        // Check if username and password are valid
-        e.preventDefault();
     };
 
     // Prevent user from entering invalid characters
