@@ -6,12 +6,8 @@ import { useEffect, useRef } from "react";
 const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
     const messageBox = useRef(null);
 
-    console.log(currentChat);
-    console.log(currentChat?.id);
-    console.log(activeUser);
-    console.log(activeUser.messages);
     const messagesLength = currentChat
-        ? activeUser?.messages[currentChat.id].length
+        ? activeUser.messages[currentChat.id].length
         : 0;
 
     const sendTextMessage = async () => {
@@ -19,6 +15,7 @@ const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
         if (message.length === 0 || !currentChat) {
             return;
         }
+        console.log(message);
         const newMessage = await Network.sendMessage(
             message,
             currentChat.id,
@@ -34,7 +31,7 @@ const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
                 ...activeUser.messages,
                 [currentChat.id]: [
                     ...activeUser.messages[currentChat.id],
-                    message,
+                    newMessage,
                 ],
             },
         });

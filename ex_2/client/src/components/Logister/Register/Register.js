@@ -18,6 +18,7 @@ const Register = () => {
     const [displayNameValid, setDisplayNameFieldValid] = useState(false);
     const [typeInConfirmation, setTypeInConfirmation] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
+    const [profilePic, setProfilePic] = useState(null);
 
     const validateAll = () => {
         validatePasswordConfirmation();
@@ -154,11 +155,15 @@ const Register = () => {
 
         // Check if a file is selected
         if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+                setProfilePic(reader.result);
+            };
             // Set the selected file as the profile picture
 
             // Create a preview image URL
-            const imageObjectURL = URL.createObjectURL(file);
-            setPreviewImage(imageObjectURL);
+            reader.readAsDataURL(file);
         }
     };
 
@@ -176,7 +181,7 @@ const Register = () => {
             username: username,
             password: password,
             displayName: displayName,
-            profilePic: previewImage,
+            profilePic: profilePic,
         };
 
         const response = await Network.register(user);

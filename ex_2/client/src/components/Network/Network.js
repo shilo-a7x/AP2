@@ -86,7 +86,7 @@ const Network = {
                 Authorization: "Bearer " + token,
             },
         };
-        const res = await fetch(urlPrefix + "/" + id + "/Messages", req);
+        const res = await fetch(urlPrefix + "/Chats/" + id + "/Messages", req);
         if (!res.ok) {
             return null;
         }
@@ -101,7 +101,7 @@ const Network = {
             },
             body: JSON.stringify({ msg: message }),
         };
-        const res = await fetch(urlPrefix + "/" + id + "/Messages", req);
+        const res = await fetch(urlPrefix + "/Chats/" + id + "/Messages", req);
         if (!res.ok) {
             return null;
         }

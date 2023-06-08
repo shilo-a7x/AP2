@@ -1,6 +1,6 @@
 import "./Chat.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactColumn from "./ContactColumn";
 import MessageColumn from "./MessageColumn";
 
@@ -14,6 +14,10 @@ const ChatPage = ({ token, setToken, activeUser, setActiveUser }) => {
         setCurrentChat(null);
         navigate("/");
     };
+
+    useEffect(() => {
+        console.log(activeUser);
+    }, [activeUser]);
 
     return (
         <div>

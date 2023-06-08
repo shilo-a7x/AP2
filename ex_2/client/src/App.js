@@ -7,13 +7,6 @@ import { useState } from "react";
 import ChatPage from "./components/ChatPage/ChatPage";
 
 function App() {
-    const [users, setUsers] = useState({
-        a: {
-            nick: "admin",
-            profilePic: process.env.PUBLIC_URL + "/profilePic/noFace.png",
-            chats: {},
-        },
-    });
     const [token, setToken] = useState(null);
     const [activeUser, setActiveUser] = useState("");
 

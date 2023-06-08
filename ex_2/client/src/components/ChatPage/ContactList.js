@@ -62,7 +62,7 @@ const ContactList = ({
                             ? "contactSelected"
                             : "contact"
                     }
-                    onClick={handleClick}>
+                    onClick={() => handleClick(chat)}>
                     <div className="info">
                         <img
                             src={chat.user.profilePic}
