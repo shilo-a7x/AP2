@@ -5,13 +5,13 @@ import ContactColumn from "./ContactColumn";
 import MessageColumn from "./MessageColumn";
 
 const ChatPage = ({ token, setToken, activeUser, setActiveUser }) => {
-    const [currentChat, setCurrentChat] = useState(-1);
+    const [currentChat, setCurrentChat] = useState(null);
     const navigate = useNavigate();
 
     const logout = () => {
         setToken(null);
         setActiveUser(null);
-        setCurrentChat(-1);
+        setCurrentChat(null);
         navigate("/");
     };
 
@@ -35,6 +35,7 @@ const ChatPage = ({ token, setToken, activeUser, setActiveUser }) => {
                 </div>
                 <div className="right-panel">
                     <MessageColumn
+                        token={token}
                         activeUser={activeUser}
                         setActiveUser={setActiveUser}
                         currentChat={currentChat}

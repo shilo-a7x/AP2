@@ -12,11 +12,11 @@ const Network = {
         const res = await fetch(urlPrefix + "/Users", req);
         return res;
     },
-    async login(userName, password, setToken) {
+    async login(username, password, setToken) {
         const req = {
             method: "post",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userName: userName, password: password }),
+            body: JSON.stringify({ username: username, password: password }),
         };
         const res = await fetch(urlPrefix + "/Tokens", req);
         if (!res.ok) {
@@ -24,7 +24,7 @@ const Network = {
         }
         const token = await res.text();
         setToken(token);
-        const user = await this.getUser(userName, token);
+        const user = await this.getUser(username, token);
         if (!user) {
             return null;
         }
@@ -35,7 +35,7 @@ const Network = {
         user.chats = chats;
         return user;
     },
-    async getUser(userName, token) {
+    async getUser(username, token) {
         const req = {
             method: "get",
             headers: {
@@ -43,7 +43,7 @@ const Network = {
                 Authorization: "Bearer " + token,
             },
         };
-        const res = await fetch(urlPrefix + "/Users/" + userName, req);
+        const res = await fetch(urlPrefix + "/Users/" + username, req);
         if (!res.ok) {
             return null;
         }
@@ -63,14 +63,14 @@ const Network = {
         }
         return await res.json();
     },
-    async addChat(userName, token) {
+    async addChat(username, token) {
         const req = {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
             },
-            body: JSON.stringify(userName),
+            body: JSON.stringify({ username: username }),
         };
         const res = await fetch(urlPrefix + "/Chats", req);
         if (!res.ok) {
@@ -85,6 +85,21 @@ const Network = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + token,
             },
+        };
+        const res = await fetch(urlPrefix + "/" + id + "/Messages", req);
+        if (!res.ok) {
+            return null;
+        }
+        return await res.json();
+    },
+    async sendMessage(message, id, token) {
+        const req = {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({ msg: message }),
         };
         const res = await fetch(urlPrefix + "/" + id + "/Messages", req);
         if (!res.ok) {

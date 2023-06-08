@@ -1,5 +1,6 @@
 import ContactList from "./ContactList";
 import { useRef } from "react";
+import Network from "../Network/Network";
 import "./Chat.css";
 
 const ContactColumn = ({
@@ -11,34 +12,34 @@ const ContactColumn = ({
 }) => {
     const newContact = useRef(null);
 
-    const addContact = (e) => {
+    const addContact = async (e) => {
         e.preventDefault();
         const newContactName = newContact.current.value;
-        if (activeUser.chats[newContactName]) {
+        if (activeUser.username === newContactName) {
+            alert("Thou shalt not talk with thy self");
             newContact.current.value = "";
             document.getElementById("close-btn").click();
             return;
         }
 
-        const contact = {
-            name: newContactName,
-        };
-
-        const chat = {
-            name: contact.name,
-            messages: [],
-        };
+        const newChat = await Network.addChat(newContactName, token);
+        if (!newChat) {
+            alert("Contact does not exist");
+            newContact.current.value = "";
+            document.getElementById("close-btn").click();
+            return;
+        }
 
         setActiveUser((u) => ({
             ...u,
-            chats: { ...u.chats, [newContactName]: chat },
+            chats: [...u.chats, newChat],
         }));
         newContact.current.value = "";
         document.getElementById("close-btn").click();
     };
 
     const checkRegex = (e) => {
-        if (!/[a-zA-Z0-9-]$/.test(e.key)) {
+        if (!/[a-zA-Z0-9]$/.test(e.key)) {
             e.preventDefault();
         }
     };
@@ -48,7 +49,7 @@ const ContactColumn = ({
             <div className="left-panel">
                 <div className="profile">
                     <img src={activeUser?.profilePic} alt="profile pic" />
-                    <p className="name">{activeUser?.nick}</p>
+                    <p className="name">{activeUser?.displayName}</p>
                     <button
                         type="button"
                         className="addContactButton"
@@ -60,7 +61,9 @@ const ContactColumn = ({
                 <div className="contact-list">
                     <div className="contacts">
                         <ContactList
+                            token={token}
                             activeUser={activeUser}
+                            setActiveUser={setActiveUser}
                             currentChat={currentChat}
                             setCurrentChat={setCurrentChat}
                         />

@@ -1,17 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { mongoose } = require('mongoose');
+const express = require("express");
+const bodyParser = require("body-parser");
+const { mongoose } = require("mongoose");
 const app = express();
-const cors = require('cors');
-const routes = require('./routes/Routes');
+const cors = require("cors");
+const routes = require("./routes/Routes");
 // const { Counter } = require('./models/Counter');
-const path = require('path');
-
+const path = require("path");
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
 
 // const initCounter = async () => {
 //     try {
@@ -32,26 +30,29 @@ app.use(cors());
 // }
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/chats', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+    .connect("mongodb://127.0.0.1:27017/chats", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => {
-        console.log('Connected to MongoDB');
+        console.log("Connected to MongoDB");
         //initCounter();
     })
-    .catch(err => console.error('Could not connect to MongoDB', err));
+    .catch((err) => console.error("Could not connect to MongoDB", err));
 
 // Routes
 app.use("/api", routes);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, "../public/build")));
 
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/build", "index.html"));
 });
 
 // Server runs on port 5000
 app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+    console.log("Server is running on port 5000");
 });
-
