@@ -1,58 +1,38 @@
 import ChatMessages from "./ChatMessages";
 import "./Chat.css";
+import Network from "../Network/Network";
 import { useEffect, useRef } from "react";
+import { socket } from "../../socket";
 
-const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
+const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
     const messageBox = useRef(null);
 
-    const messagesLength =
-        currentChat !== -1 ? activeUser.chats[currentChat].messages.length : 0;
-    const sendMessage = (message) => {
-        // Add new message to current chat's messages
-        if (currentChat !== -1) {
-            setActiveUser({
-                ...activeUser,
-                chats: {
-                    ...activeUser.chats,
-                    [currentChat]: {
-                        ...activeUser.chats[currentChat],
-                        messages: [
-                            ...activeUser.chats[currentChat].messages,
-                            message,
-                        ],
-                    },
-                },
-            });
-        }
-    };
+    const messagesLength = currentChat
+        ? activeUser.messages[currentChat.id].length
+        : 0;
 
-    const sendTextMessage = () => {
+    const sendTextMessage = async () => {
         const message = messageBox.current.value.trim();
-        if (message.length > 0) {
-            const time = new Date();
-            const currentTime = time.toLocaleString("he-IL", {
-                year: "numeric",
-                month: "numeric",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-            const HMTime = time.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-            // Create new message object
-            const newMessage = {
-                id: activeUser.chats[currentChat].messages.length + 1,
-                sent: true,
-                content: message,
-                time: currentTime,
-                HMTime: HMTime,
-            };
-            sendMessage(newMessage);
-            messageBox.current.scrollTop = 0;
-            messageBox.current.value = "";
+        if (message.length === 0 || !currentChat) {
+            return;
         }
+        const newMessage = await Network.sendMessage(
+            message,
+            currentChat.id,
+            token
+        );
+        if (!newMessage) {
+            alert("Could not send message");
+            return;
+        }
+        socket.emit('chat', {
+            roomId: currentChat.id,
+            message: {
+                chatId: currentChat.id, content: message, sender: { username: activeUser.username }, created: new Date()
+            }
+        })
+        messageBox.current.scrollTop = 0;
+        messageBox.current.value = "";
     };
 
     const keyPressed = (e) => {
@@ -80,19 +60,14 @@ const MessageColumn = ({ activeUser, setActiveUser, currentChat }) => {
 
     return (
         <>
-            {(currentChat !== -1 && (
+            {(currentChat && (
                 <>
                     <div className="contact-info">
                         <img
-                            src={
-                                process.env.PUBLIC_URL +
-                                "/profilePic/noFace.png"
-                            }
+                            src={currentChat?.user?.profilePic}
                             alt="profile pic"
                         />
-                        <p className="name">
-                            {activeUser.chats[currentChat].name}
-                        </p>
+                        <p className="name">{currentChat.user.displayName}</p>
                     </div>
                     <ChatMessages
                         activeUser={activeUser}

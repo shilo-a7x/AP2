@@ -6,26 +6,28 @@ const userSchema = Schema(
         username: {
             type: String,
             nullable: true,
-            required: true
+            required: true,
+            index: true,
         },
 
         password: {
             type: String,
             nullable: true,
-            required: true
+            required: true,
+            select: false,
         },
 
         displayName: {
             type: String,
             nullable: true,
             required: true
-        }, 
-        
+        },
+
         profilePic: {
             type: String,
             nullable: true,
             required: true
-        } 
+        }
     }
 )
 

@@ -18,6 +18,7 @@ const Register = () => {
     const [displayNameValid, setDisplayNameFieldValid] = useState(false);
     const [typeInConfirmation, setTypeInConfirmation] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
+    const [profilePic, setProfilePic] = useState(null);
 
     const validateAll = () => {
         validatePasswordConfirmation();
@@ -61,7 +62,7 @@ const Register = () => {
     const checkUsernameRegex = (e) => {
         document.getElementById("usernameError").innerHTML = "";
 
-        if (!/[a-zA-Z0-9-]$/.test(e.key)) {
+        if (!/[a-zA-Z0-9]$/.test(e.key)) {
             document.getElementById("usernameError").innerHTML =
                 "Username must contain only letters and numbers";
             e.preventDefault();
@@ -81,12 +82,15 @@ const Register = () => {
         }
         // Check if password contains at least one number, one lowercase and one uppercase character
         else if (
-            !/[a-z]/.test(password) ||
-            !/[A-Z]/.test(password) ||
-            !/[0-9]/.test(password)
+            !(
+                /[a-z]/.test(password) &&
+                /[A-Z]/.test(password) &&
+                /[0-9]/.test(password) &&
+                /^[a-zA-Z0-9]+$/.test(password)
+            )
         ) {
             document.getElementById("passwordError").innerHTML =
-                "Password must contain at least one number, one lowercase and one uppercase character";
+                "Password must be alphanumeric with at least 1 number, 1 lowercase and 1 uppercase";
             invalid = true;
         } else {
             document.getElementById("passwordError").innerHTML = "";
@@ -121,16 +125,19 @@ const Register = () => {
     const checkDisplayRegex = (e) => {
         document.getElementById("displayNameError").innerHTML = "";
 
-        if (!/[a-zA-Z0-9-]$/.test(e.key)) {
+        if (!/[0-9a-zA-Z '\-.,]$/.test(e.key)) {
             document.getElementById("displayNameError").innerHTML =
-                "Display name can only contain letters, spaces, hyphens, periods, dots, and commas";
+                "Display name can only contain letters, numbers, spaces, hyphens, apostrophes, periods, dots, and commas";
             e.preventDefault();
         }
     };
 
     const validateDisplayName = () => {
         let invalid = false;
-        const displayName = displayNameContainer.current.value;
+        // ignore spaces at end and start and allow only 1 between chars
+        const displayName = displayNameContainer.current.value
+            .trim()
+            .replace(/\s+/g, " ");
 
         // Check if display length is less than 3
         if (displayName.length < 3) {
@@ -148,11 +155,15 @@ const Register = () => {
 
         // Check if a file is selected
         if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+                setProfilePic(reader.result);
+            };
             // Set the selected file as the profile picture
 
             // Create a preview image URL
-            const imageObjectURL = URL.createObjectURL(file);
-            setPreviewImage(imageObjectURL);
+            reader.readAsDataURL(file);
         }
     };
 
@@ -161,41 +172,20 @@ const Register = () => {
 
         const username = usernameContainer.current.value;
         const password = passwordContainer.current.value;
-        const displayName = displayNameContainer.current.value;
-        // if (credentials[username]) {
-        //     document.getElementById("usernameError").innerHTML =
-        //         "Username is already taken";
-        //     document.getElementById("username").classList.add("is-invalid");
-        //     document
-        //         .getElementById("usernameLabel")
-        //         .classList.add("text-danger");
-        //     setUsernameFieldValid(false);
-        //     e.preventDefault();
-        //     return;
-        // }
+        // ignore spaces at end and start and allow only 1 between chars
+        const displayName = displayNameContainer.current.value
+            .trim()
+            .replace(/\s+/g, " ");
 
-        // setCredentials({ ...credentials, [username]: password });
-        // // Create new user
-        // const newUser = {
-        //     [username]: {
-        //         nick: displayName,
-        //         profilePic: previewImage,
-        //         chats: {},
-        //     },
-        // };
-
-        // setUsers({ ...users, ...newUser });
-
-        // server implementation
         const user = {
             username: username,
             password: password,
             displayName: displayName,
-            profilePic: previewImage,
+            profilePic: profilePic,
         };
 
         const response = await Network.register(user);
-        if (response.status == 409) {
+        if (response.status === 409) {
             document.getElementById("usernameError").innerHTML =
                 "Username is already taken";
             document.getElementById("username").classList.add("is-invalid");

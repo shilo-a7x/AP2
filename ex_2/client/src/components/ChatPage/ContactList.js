@@ -1,50 +1,87 @@
 import "./Chat.css";
+import Network from "../Network/Network";
 
-const ContactList = ({ activeUser, currentChat, setCurrentChat }) => {
-    const defaultMessage = "start chat";
+const ContactList = ({
+    token,
+    activeUser,
+    setActiveUser,
+    currentChat,
+    setCurrentChat,
+}) => {
+    const defaultMessage = "Start chat";
+
+    const parseTime = (lastMessageTime) => {
+        const time = new Date(lastMessageTime);
+        const formattedTime = time.toLocaleString("he-IL", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        return formattedTime;
+    };
+
+    const clampName = (name) => {
+        if (name.length > 12) {
+            return name.slice(0, 12) + "...";
+        }
+        return name;
+    };
+
+    const clampMessage = (message) => {
+        if (message.length > 15) {
+            return message.slice(0, 15) + "...";
+        }
+        return message;
+    };
+
+    const handleClick = async (chat) => {
+        const contactMessages = await Network.getMessages(chat.id, token);
+        if (!contactMessages) {
+            alert("Could not get messages");
+            return;
+        }
+        setActiveUser({
+            ...activeUser,
+            messages: {
+                ...activeUser.messages,
+                [chat.id]: contactMessages.reverse(),
+            },
+        });
+        setCurrentChat(chat);
+    };
 
     return (
         <ol className="contacts-list">
-            {Object.entries(activeUser.chats).map(([chatID, chat]) => (
+            {activeUser.chats.map((chat) => (
                 <ul
-                    key={chatID}
+                    key={chat.id}
                     className={
-                        currentChat !== -1 && currentChat === chatID
+                        currentChat && currentChat.id === chat.id
                             ? "contactSelected"
                             : "contact"
                     }
-                    onClick={() => {
-                        setCurrentChat(chatID);
-                    }}>
+                    onClick={() => handleClick(chat)}>
                     <div className="info">
                         <img
-                            src={
-                                process.env.PUBLIC_URL +
-                                "/profilePic/noFace.png"
-                            }
+                            src={chat.user.profilePic}
                             className="contactPic"
                             alt="profile-pic"
                         />
                         <span className="name">
-                            {chat.name.length > 12
-                                ? chat.name.slice(0, 12) + "..."
-                                : chat.name}
+                            {clampName(chat.user.displayName)}
                         </span>
                         <span className="lastMessage">
                             <div className="last-message-date">
-                                {chat.messages?.at(-1)?.time || ""}{" "}
+                                {chat.lastMessage
+                                    ? parseTime(chat.lastMessage.created)
+                                    : ""}
                             </div>
                             <div className="last-message">
-                                {(
-                                    chat.messages?.at(-1)?.content ||
-                                    defaultMessage
-                                ).length > 15
-                                    ? (
-                                          chat.messages?.at(-1)?.content ||
-                                          defaultMessage
-                                      ).slice(0, 15) + "..."
-                                    : chat.messages?.at(-1)?.content ||
-                                      defaultMessage}
+                                {chat.lastMessage
+                                    ? clampMessage(chat.lastMessage.content)
+                                    : defaultMessage}
                             </div>
                         </span>
                     </div>

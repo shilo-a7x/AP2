@@ -1,17 +1,28 @@
 import "./Chat.css";
 
 const ChatMessages = ({ activeUser, currentChat }) => {
+    const parseTime = (time) => {
+        const t = new Date(time);
+        const formattedTime = t.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        return formattedTime;
+    };
+
     return (
         <ol className="chat">
-            {activeUser.chats[currentChat].messages.map((message) => (
-                <ul key={message.id} className="chat-list">
+            {activeUser.messages[currentChat.id].map((message, index) => (
+                <ul key={message.id || index} className="chat-list">
                     <div
                         className={
-                            message.sent ? "message sent" : "message received"
+                            message.sender.username === activeUser.username
+                                ? "message sent"
+                                : "message received"
                         }>
                         <p className="text">{message.content}</p>
                         <span className="message-timestamp">
-                            {message.HMTime}
+                            {parseTime(message.created)}
                         </span>
                     </div>
                 </ul>

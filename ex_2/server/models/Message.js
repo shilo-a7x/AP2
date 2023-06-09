@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 const messageSchema = Schema(
     {
+        chatId: {
+            type: String
+        },
         content: {
             type: String,
             nullable: true
         },
         sender: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+            username: String
         },
         created: {
             type: Date,
