@@ -17,16 +17,12 @@ const ContactColumn = ({
         const newContactName = newContact.current.value;
         if (activeUser.username === newContactName) {
             alert("Thou shalt not talk with thy self");
-            newContact.current.value = "";
-            document.getElementById("close-btn").click();
             return;
         }
 
         const newChat = await Network.addChat(newContactName, token);
         if (!newChat) {
             alert("Contact does not exist");
-            newContact.current.value = "";
-            document.getElementById("close-btn").click();
             return;
         }
 

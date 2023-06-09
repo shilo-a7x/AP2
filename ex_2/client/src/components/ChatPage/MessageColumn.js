@@ -15,7 +15,6 @@ const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
         if (message.length === 0 || !currentChat) {
             return;
         }
-        console.log(message);
         const newMessage = await Network.sendMessage(
             message,
             currentChat.id,

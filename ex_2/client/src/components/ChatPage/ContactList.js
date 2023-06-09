@@ -46,7 +46,7 @@ const ContactList = ({
             ...activeUser,
             messages: {
                 ...activeUser.messages,
-                [chat.id]: contactMessages,
+                [chat.id]: contactMessages.reverse(),
             },
         });
         setCurrentChat(chat);
@@ -76,7 +76,7 @@ const ContactList = ({
                             <div className="last-message-date">
                                 {chat.lastMessage
                                     ? parseTime(chat.lastMessage.created)
-                                    : ""}{" "}
+                                    : ""}
                             </div>
                             <div className="last-message">
                                 {chat.lastMessage

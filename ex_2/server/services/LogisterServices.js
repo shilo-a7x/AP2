@@ -1,6 +1,6 @@
-const { log } = require('console');
-const { User } = require('../models/User');
-const jwt = require('jsonwebtoken');
+const { log } = require("console");
+const { User } = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 exports.createUser = async (req, res) => {
     const { username, password, displayName, profilePic } = req.body;
@@ -9,11 +9,18 @@ exports.createUser = async (req, res) => {
         // Check if user already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res.status(400).json({ message: 'Username already exists.' });
+            return res
+                .status(400)
+                .json({ message: "Username already exists." });
         }
 
         // Create new user
-        const newUser = new User({ username, password, displayName, profilePic });
+        const newUser = new User({
+            username,
+            password,
+            displayName,
+            profilePic,
+        });
         await newUser.save();
 
         res.status(201).json(newUser);
@@ -23,13 +30,17 @@ exports.createUser = async (req, res) => {
 };
 
 exports.verifyUser = async (req, res) => {
-    const { userName: username, password } = req.body;
+    const { username, password } = req.body;
     try {
         const user = await User.findOne({ username, password });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid username or password.' });
+            return res
+                .status(400)
+                .json({ message: "Invalid username or password." });
         }
-        const token = jwt.sign({ userId: user._id }, 'hello', { expiresIn: '10000h' }); // Replace 'secret' with your actual secret
+        const token = jwt.sign({ userId: user._id }, "hello", {
+            expiresIn: "10000h",
+        }); // Replace 'secret' with your actual secret
         res.status(200).send(token);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -42,7 +53,7 @@ exports.getUser = async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(404).json({ message: 'User not found.' });
+            return res.status(404).json({ message: "User not found." });
         }
 
         res.status(200).json(user);
