@@ -25,6 +25,7 @@ npm install
 ## Libraries used
 
 -   `react-router-dom`
+-   `socket.io-client`
 
 ## Running
 
@@ -34,7 +35,7 @@ npm install
 npm start
 ```
 
-Visit http://localhost:3000/
+Visit http://localhost:3000
 
 <br>
 

@@ -21,27 +21,20 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-    console.log("User connected", socket.id);
-
     socket.on("joinRoom", (roomId) => {
         socket.join(roomId);
-        console.log("User joined room", roomId);
     });
 
     socket.on("leaveRoom", (roomId) => {
         socket.leave(roomId);
-        console.log("User left room", roomId);
     });
 
     socket.on("chat", (data) => {
-        console.log("Chat received:", data);
         const { roomId, message } = data;
         io.to(roomId).emit("chat", message);
     });
 
-    socket.on("disconnect", () => {
-        console.log("User disconnected", socket.id);
-    });
+    socket.on("disconnect", () => {});
 });
 
 // Connect to MongoDB

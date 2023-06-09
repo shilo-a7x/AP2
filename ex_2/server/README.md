@@ -2,42 +2,54 @@
 
 ## Features
 
--   Registration
-    -   Username, password, display name and profile pic fields
-    -   All fields required, with input restrictions
--   Login page
-    -   Username and password authentication
--   Chat page
-    -   Add contact button
-    -   Chat saved when switching contacts
-    -   Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
-    -   Logout button - returns to login page
-    -   A web-socket based communication for real time messaging
+-   A node.js server dedicated to a chat-app:
+    -   User verification with JWT
+    -   All data like users, chats and messages is stored using MongoDB
+    -   Real time communication between and to clients
+-   Brief of the api:
+    -   Users:
+        -   <kbd>GET</kbd> /api/Users/{username}
+        -   <kbd>POST</kbd> /api/Users
+    -   Tokens:
+        -   <kbd>POST</kbd> /api/Tokens
+    -   Chats:
+        -   <kbd>GET</kbd> /api/Chats
+        -   <kbd>POST</kbd> /api/Chats
+        -   <kbd>GET</kbd> /api/Chats/{id}
+        -   <kbd>DELETE</kbd> /api/Chats/{id}
+        -   <kbd>POST</kbd> /api/Chats/{id}/Messages
+        -   <kbd>GET</kbd> /api/Chats/{id}/Messages
 
 ## Installation
 
 ```shell
 git clone https://github.com/shilo-a7x/AP2.git
-cd AP2/ex_2/client
+cd AP2/ex_2/server
 npm install
 ```
 
 ## Libraries used
 
--   `react-router-dom`
+-   `body-parser`
+-   `cors`
+-   `express`
+-   `jsonwebtoken`
+-   `mongoose`
+-   `socket.io`
+
+**_Installation of MongoDB is required!_**
 
 ## Running
-
--   Make sure to run the server first at ../server. See instructions in the README there.
 
 ```shell
 npm start
 ```
 
-Visit http://localhost:3000/
+The server's port is 5000
+The server has a standalone version of the chat-app at http://localhost:5000
 
 <br>
 
 **Enjoy!**
 
-![like a mozzarella](public/profilePic/grandpa.png)
+![Pardon it's a me Cop](public/profilePic/cop.png)
