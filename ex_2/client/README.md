@@ -12,6 +12,7 @@
     -   Chat saved when switching contacts
     -   Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)
     -   Logout button - returns to login page
+    -   A web-socket based communication for real time messaging
 
 ## Installation
 
