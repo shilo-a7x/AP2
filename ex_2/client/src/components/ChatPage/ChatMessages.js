@@ -12,8 +12,8 @@ const ChatMessages = ({ activeUser, currentChat }) => {
 
     return (
         <ol className="chat">
-            {activeUser.messages[currentChat.id].map((message) => (
-                <ul key={message.id} className="chat-list">
+            {activeUser.messages[currentChat.id].map((message, index) => (
+                <ul key={message.id || index} className="chat-list">
                     <div
                         className={
                             message.sender.username === activeUser.username

@@ -1,4 +1,3 @@
-const { log } = require("console");
 const { User } = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -38,9 +37,15 @@ exports.verifyUser = async (req, res) => {
                 .status(400)
                 .json({ message: "Invalid username or password." });
         }
-        const token = jwt.sign({ userId: user._id }, "hello", {
-            expiresIn: "10000h",
-        }); // Replace 'secret' with your actual secret
+        const token = jwt.sign(
+            { userId: user._id, username: user.username },
+            "hello",
+            {
+                expiresIn: "10000h",
+            }
+        ); // Replace 'secret' with your actual secret
+
+        jwt.decode(token); // userId
         res.status(200).send(token);
     } catch (error) {
         res.status(500).json({ message: error.message });

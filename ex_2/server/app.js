@@ -1,33 +1,48 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { mongoose } = require("mongoose");
+const { Server } = require("socket.io");
 const app = express();
 const cors = require("cors");
 const routes = require("./routes/Routes");
-// const { Counter } = require('./models/Counter');
-const path = require("path");
+const http = require("http");
 
 // Middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
 
-// const initCounter = async () => {
-//     try {
-//         // Check if counter exists
-//         const counter = await Counter.findById('chatCounter');
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+    transports: ["websocket"],
+    cors: {
+        allowedHeaders: "http://localhost:3000",
+        origin: "http://localhost:3000",
+    },
+});
 
-//         // If not, create it
-//         if (!counter) {
-//             const chatCounter = new Counter({ counterName: 'chatCounter' });
-//             await chatCounter.save();
-//             console.log("Chat counter has been created.");
-//         } else {
-//             console.log("Chat counter already initialized.");
-//         }
-//     } catch (err) {
-//         console.error("Error initializing database:", err);
-//     }
-// }
+io.on("connection", (socket) => {
+    console.log("User connected", socket.id);
+
+    socket.on("joinRoom", (roomId) => {
+        socket.join(roomId);
+        console.log("User joined room", roomId);
+    });
+
+    socket.on("leaveRoom", (roomId) => {
+        socket.leave(roomId);
+        console.log("User left room", roomId);
+    });
+
+    socket.on("chat", (data) => {
+        console.log("Chat received:", data);
+        const { roomId, message } = data;
+        io.to(roomId).emit("chat", message);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("User disconnected", socket.id);
+    });
+});
 
 // Connect to MongoDB
 mongoose
@@ -37,7 +52,6 @@ mongoose
     })
     .then(() => {
         console.log("Connected to MongoDB");
-        //initCounter();
     })
     .catch((err) => console.error("Could not connect to MongoDB", err));
 
@@ -53,6 +67,6 @@ app.get("*", (req, res) => {
 });
 
 // Server runs on port 5000
-app.listen(5000, () => {
+httpServer.listen(5000, () => {
     console.log("Server is running on port 5000");
 });

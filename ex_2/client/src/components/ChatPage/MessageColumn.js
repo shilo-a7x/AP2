@@ -2,6 +2,7 @@ import ChatMessages from "./ChatMessages";
 import "./Chat.css";
 import Network from "../Network/Network";
 import { useEffect, useRef } from "react";
+import { socket } from "../../socket";
 
 const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
     const messageBox = useRef(null);
@@ -24,16 +25,12 @@ const MessageColumn = ({ token, activeUser, setActiveUser, currentChat }) => {
             alert("Could not send message");
             return;
         }
-        setActiveUser({
-            ...activeUser,
-            messages: {
-                ...activeUser.messages,
-                [currentChat.id]: [
-                    ...activeUser.messages[currentChat.id],
-                    newMessage,
-                ],
-            },
-        });
+        socket.emit('chat', {
+            roomId: currentChat.id,
+            message: {
+                chatId: currentChat.id, content: message, sender: { username: activeUser.username }, created: new Date()
+            }
+        })
         messageBox.current.scrollTop = 0;
         messageBox.current.value = "";
     };

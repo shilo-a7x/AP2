@@ -1,5 +1,5 @@
 const { createUser, verifyUser, getUser } = require('../services/LogisterServices');
-const { createChat, getContacts, getChat, sendMessage, getAllMessages, deleteChat } = require('../services/ChatServices');
+const { createChat, getContacts, getChat, createMessage, getMessages, deleteChat } = require('../services/ChatServices');
 
 
 exports.createUser = async (req, res) => {
@@ -53,7 +53,7 @@ exports.getChat = async (req, res) => {
 
 exports.sendMessage = async (req, res) => {
     try {
-        await sendMessage(req, res);
+        await createMessage(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -61,7 +61,7 @@ exports.sendMessage = async (req, res) => {
 
 exports.getAllMessages = async (req, res) => {
     try {
-        await getAllMessages(req, res);
+        await getMessages(req, res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

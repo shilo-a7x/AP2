@@ -24,15 +24,13 @@ const Network = {
         }
         const token = await res.text();
         setToken(token);
+        localStorage.setItem("token", token);
         const user = await this.getUser(username, token);
+        localStorage.setItem("username", user.username);
         if (!user) {
             return null;
         }
-        const chats = await this.getChats(token);
-        if (!chats) {
-            return null;
-        }
-        user.chats = chats;
+        user.chats = [];
         return user;
     },
     async getUser(username, token) {
@@ -47,7 +45,9 @@ const Network = {
         if (!res.ok) {
             return null;
         }
-        return await res.json();
+        const user = await res.json();
+        user.chats = [];
+        return user;
     },
     async getChats(token) {
         const req = {
