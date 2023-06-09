@@ -42,7 +42,7 @@ npm install
 ## Running
 
 ```shell
-npm start
+node app.js
 ```
 
 The server's port is 5000
