@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "- Registration page\r     - Username, password, display name and profile pic fields\r     - All fields required, with input restrictions\r - Login page\r     - Username and password authentication\r     - For testing, you may login with admin user (hard-coded in the app): Username: 'a', Password: '1'\r - Chat page\r     - Add contact button\r     - Chat saved when switching contacts\r     - Support multi-line messages (<kbd>Shift</kbd>+<kbd>Enter</kbd> to insert a new line, <kbd>Enter</kbd> to send)\r     - Logout button - returns to login page and erase all chats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.2",
+    "socket.io": "^4.6.2"
+  }
+}
