@@ -42,10 +42,10 @@ npm install
 ## Running
 
 ```shell
-npm start
+node app.js
 ```
 
-The server's port is 5000
+The server's port is 5000<br>
 The server has a standalone version of the chat-app at http://localhost:5000
 
 <br>
