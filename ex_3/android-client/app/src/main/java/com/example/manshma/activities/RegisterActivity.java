@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private String base64ProfilePic;
-    
+
     private ActivityResultLauncher<Intent> galleryLauncher;
 
     @Override
