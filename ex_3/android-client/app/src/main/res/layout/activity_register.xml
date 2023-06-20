@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".logister.RegisterActivity">
+    android:background="#E8F1FF"
+    android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        tools:ignore="UselessParent">
+
+        <!-- Username EditText -->
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/username"
+            android:background="@drawable/edit_text_border"
+            android:padding="8dp"
+            android:inputType="text"
+            android:maxLength="15"
+            tools:ignore="Autofill" />
+
+        <!-- Password EditText -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/password"
+            android:background="@drawable/edit_text_border"
+            android:padding="8dp"
+            android:maxLength="25"
+            android:inputType="textPassword"
+            tools:ignore="Autofill" />
+
+        <!-- Confirm Password EditText -->
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/confirm_password"
+            android:background="@drawable/edit_text_border"
+            android:padding="8dp"
+            android:maxLength="25"
+            android:inputType="textPassword"
+            tools:ignore="Autofill" />
+
+        <!-- Display Name EditText -->
+        <EditText
+            android:id="@+id/displayNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/display_name"
+            android:maxLength="15"
+            android:background="@drawable/edit_text_border"
+            android:padding="8dp"
+            android:inputType="text"
+            tools:ignore="Autofill" />
+
+
+        <!-- Upload Profile Picture Button -->
+
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/uploadImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/bright_blue"
+            android:drawableEnd="@drawable/ic_upload_icon"
+            android:drawableTint="@color/white"
+            android:text="@string/upload_profile_picture"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/register_btn"
+            android:backgroundTint="@color/bright_blue"
+            android:textColor="@color/white" />
+
+        <!-- Login Prompt -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:text="@string/login_prompt" />
+        <!-- Login Prompt -->
+        <TextView
+            android:id="@+id/loginLinkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="@string/login_link"
+            android:clickable="true"
+            android:textColor="@color/bright_blue"/>
+
+
+    </LinearLayout>
+</RelativeLayout>
