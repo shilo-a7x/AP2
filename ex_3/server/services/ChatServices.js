@@ -1,14 +1,14 @@
-const jwt = require("jsonwebtoken");
 const { Chat } = require("../models/Chat");
 const { User } = require("../models/User");
 const { Message } = require("../models/Message");
+const { decode, extractToken } = require("../tokens/JwtAuthenticator");
 
 // scheme: { id, users: ['tom', 'jerry']}
 // returns { id: string, user: User }
 exports.createChat = async (req, res) => {
     const { username: contactUsername } = req.body;
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "hello"); // Replace 'secret' with your actual secret
+    const token = extractToken(req);
+    const decodedToken = decode(token);
     const { username } = decodedToken;
     if (username === contactUsername) {
         return res
@@ -22,15 +22,10 @@ exports.createChat = async (req, res) => {
         if (!currentUser || !contactUser) {
             return res.status(404).json({ message: "User not found." });
         }
-        //  Check if Chat exist
-        const existingChat = await Chat.findOne({
+
+        const newChat = await Chat.create({
             users: [username, contactUsername],
         });
-        if (existingChat) {
-            return res.status(400).json({ message: "Chat already exists." });
-        }
-
-        const newChat = Chat.create({ users: [username, contactUsername] });
         if (!newChat) {
             return res
                 .status(400)
@@ -43,8 +38,8 @@ exports.createChat = async (req, res) => {
 };
 
 exports.getContacts = async (req, res) => {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "hello"); // Replace 'secret' with your actual secret
+    const token = extractToken(req);
+    const decodedToken = decode(token);
     const { username } = decodedToken;
 
     try {
@@ -56,10 +51,10 @@ exports.getContacts = async (req, res) => {
                 );
                 const user = await User.findOne({ username: contactUser });
                 const lastMessage = await Message.findOne(
-                    { chatId: chat._id },
+                    { chatId: chat.id },
                     { sender: 0 }
                 ).sort({ created: -1 });
-                return { id: chat._id, user, lastMessage };
+                return { id: chat.id, user, lastMessage };
             })
         );
         res.status(200).json(finalChats);
@@ -72,19 +67,36 @@ exports.getChat = async (req, res) => {
     const chatId = req.params.id;
 
     try {
-        const chat = await Chat.findById(chatId)
-            .populate("users", "username displayName profilePic")
-            .populate({
-                path: "messages",
-                populate: {
-                    path: "sender",
-                    select: "username displayName profilePic",
-                },
-            });
+        const chat = await Chat.findById(chatId);
         if (!chat) {
             return res.status(404).json({ message: "Chat not found." });
         }
-        res.status(200).json(chat);
+
+        const users = await User.find(
+            { username: { $in: chat.users } },
+            "username displayName profilePic"
+        );
+        const populatedChat = { id: chatId, users };
+
+        const messages = await Message.find({ chatId }, { chatId: 0 });
+        const populatedMessages = [];
+
+        for (const message of messages) {
+            const sender = users.find(
+                (user) => user.username === message.sender.username
+            );
+            const formattedMessage = {
+                id: message.id,
+                created: message.created,
+                sender,
+                content: message.content,
+            };
+            populatedMessages.push(formattedMessage);
+        }
+
+        populatedChat.messages = populatedMessages;
+
+        res.status(200).json(populatedChat);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -93,8 +105,8 @@ exports.getChat = async (req, res) => {
 exports.createMessage = async (req, res) => {
     const chatId = req.params.id;
     const msg = req.body.msg;
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "hello"); // Replace 'secret' with your actual secret
+    const token = extractToken(req);
+    const decodedToken = decode(token);
     const { username } = decodedToken;
 
     try {

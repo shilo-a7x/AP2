@@ -72,13 +72,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (username.length() < 3 || !username.matches("^[a-zA-Z0-9]+$")) {
-            binding.usernameEditText.setError("Username must be at least 3 " + "characters " + "alphanumeric only");
+            binding.usernameEditText.setError("Username must be at least 3 characters alphanumeric only");
             return;
         }
 
         if (password.length() < 6 || !isValidPassword(password)) {
-            binding.passwordEditText.setError("Invalid password, must be " + "alphanumeric with at " +
-                                              "least 1 number, 1 uppercase and 1 lowercase");
+            binding.passwordEditText.setError(
+                    "Invalid password, must be at least 6 characters, alphanumeric only with at least 1 number, 1 " +
+                    "uppercase and 1 lowercase");
             return;
         }
 
@@ -88,7 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (displayName.length() < 3 || !isValidDisplayName(displayName)) {
-            binding.displayNameEditText.setError("Invalid display name");
+            binding.displayNameEditText.setError(
+                    "Invalid display name, must be at least 3 characters, only of letters, numbers, spaces, hyphens, " +
+                    "apostrophes, periods, dots, and commas");
             return;
         }
 
@@ -113,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isValidPassword(String password) {
-        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)" + "[a-zA-Z0-9]+$";
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9]+$";
         Pattern pattern = Pattern.compile(passwordPattern);
         return pattern.matcher(password).matches();
     }
