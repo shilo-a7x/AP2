@@ -12,13 +12,20 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.manshma.api.UserApi;
 import com.example.manshma.databinding.ActivityRegisterBinding;
+import com.example.manshma.models.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,8 +41,16 @@ public class RegisterActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        binding.usernameEditText.setOnClickListener(v -> binding.usernameEditText.setError(null));
+        binding.passwordEditText.setOnClickListener(v -> binding.passwordEditText.setError(null));
+        binding.confirmPasswordEditText.setOnClickListener(v -> binding.confirmPasswordEditText.setError(null));
+        binding.displayNameEditText.setOnClickListener(v -> binding.displayNameEditText.setError(null));
+
         binding.registerButton.setOnClickListener(v -> registerUser());
-        binding.uploadImageButton.setOnClickListener(v -> openGallery());
+        binding.uploadImageButton.setOnClickListener(v -> {
+            binding.uploadImageButton.setError(null);
+            openGallery();
+        });
 
         // Initialize the ActivityResultLauncher for gallery selection
         galleryLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -47,13 +62,16 @@ public class RegisterActivity extends AppCompatActivity {
                     if (bitmap != null) {
                         base64ProfilePic = convertBitmapToBase64(bitmap);
                     } else {
+                        binding.uploadImageButton.setError("Invalid image file");
                         Toast.makeText(this, "Invalid image file", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    binding.uploadImageButton.setError("Failed to load image");
                     Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
                 }
             } else {
+                binding.uploadImageButton.setError("No image selected");
                 Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
             }
         });
@@ -100,15 +118,25 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // Perform registration process
-        // TODO: Implement the registration logic with the server
-        // Send the registration data (username, password, displayName,
-        // base64ProfilePic) to the
-        // server
+        User user = new User(username, password, displayName, base64ProfilePic);
+        UserApi api = new UserApi();
 
-        // Display success message
-        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
+        api.registerUser(user, new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+
+        // TODO
         // Move to the next screen (e.g., ContactsActivity)
 //        Intent intent = new Intent(this, ContactsActivity.class);
 //        startActivity(intent);
@@ -134,8 +162,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private String convertBitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        byte[] profilePicBytes = outputStream.toByteArray();
-        return Base64.encodeToString(profilePicBytes, Base64.DEFAULT);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
+        byte[] imageBytes = outputStream.toByteArray();
+        return "data:image/jpeg;base64," + Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
 }
