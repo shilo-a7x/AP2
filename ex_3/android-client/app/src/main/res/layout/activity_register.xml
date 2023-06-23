@@ -9,9 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <!-- Username EditText -->
@@ -21,11 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:hint="@string/username"
             android:background="@drawable/edit_text_border"
-            android:padding="8dp"
+            android:hint="@string/username"
             android:inputType="text"
             android:maxLength="15"
+            android:padding="8dp"
             tools:ignore="Autofill" />
 
         <!-- Password EditText -->
@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="@string/password"
             android:background="@drawable/edit_text_border"
-            android:padding="8dp"
-            android:maxLength="25"
+            android:hint="@string/password"
             android:inputType="textPassword"
+            android:maxLength="25"
+            android:padding="8dp"
             tools:ignore="Autofill" />
 
         <!-- Confirm Password EditText -->
@@ -49,11 +49,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:hint="@string/confirm_password"
             android:background="@drawable/edit_text_border"
-            android:padding="8dp"
-            android:maxLength="25"
+            android:hint="@string/confirm_password"
             android:inputType="textPassword"
+            android:maxLength="25"
+            android:padding="8dp"
             tools:ignore="Autofill" />
 
         <!-- Display Name EditText -->
@@ -63,18 +63,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="@string/display_name"
-            android:maxLength="15"
             android:background="@drawable/edit_text_border"
-            android:padding="8dp"
+            android:hint="@string/display_name"
             android:inputType="text"
+            android:maxLength="15"
+            android:padding="8dp"
             tools:ignore="Autofill" />
-
 
         <!-- Upload Profile Picture Button -->
 
-
-        <!-- Register Button -->
         <Button
             android:id="@+id/uploadImageButton"
             android:layout_width="wrap_content"
@@ -87,14 +84,15 @@
             android:text="@string/upload_profile_picture"
             android:textColor="@color/white" />
 
+        <!-- Register Button -->
         <Button
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            android:text="@string/register_btn"
             android:backgroundTint="@color/bright_blue"
+            android:text="@string/register_btn"
             android:textColor="@color/white" />
 
         <!-- Login Prompt -->
@@ -106,14 +104,14 @@
             android:text="@string/login_prompt" />
         <!-- Login Prompt -->
         <TextView
-            android:id="@+id/loginLinkTextView"
+            android:id="@+id/loginLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            android:text="@string/login_link"
             android:clickable="true"
-            android:textColor="@color/bright_blue"/>
+            android:text="@string/login_link"
+            android:textColor="@color/bright_blue" />
 
 
     </LinearLayout>

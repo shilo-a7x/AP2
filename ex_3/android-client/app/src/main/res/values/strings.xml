@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ma`Nshma</string>
+    <string name="app_name">Ma\'Nshma</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -8,4 +8,7 @@
     <string name="register_btn">Register</string>
     <string name="login_prompt">Already registered?</string>
     <string name="login_link">Login here</string>
+    <string name="register_prompt">Don\'t have an account?</string>
+    <string name="register_link">Register here</string>
+    <string name="login_btn">Login</string>
 </resources>

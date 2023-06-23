@@ -46,10 +46,16 @@ public class RegisterActivity extends AppCompatActivity {
         binding.confirmPasswordEditText.setOnClickListener(v -> binding.confirmPasswordEditText.setError(null));
         binding.displayNameEditText.setOnClickListener(v -> binding.displayNameEditText.setError(null));
 
-        binding.registerButton.setOnClickListener(v -> registerUser());
+        binding.registerButton.setOnClickListener(v -> register());
         binding.uploadImageButton.setOnClickListener(v -> {
             binding.uploadImageButton.setError(null);
             openGallery();
+        });
+
+        binding.loginLink.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         // Initialize the ActivityResultLauncher for gallery selection
@@ -62,22 +68,22 @@ public class RegisterActivity extends AppCompatActivity {
                     if (bitmap != null) {
                         base64ProfilePic = convertBitmapToBase64(bitmap);
                     } else {
-                        binding.uploadImageButton.setError("Invalid image file");
+                        binding.uploadImageButton.setError("");
                         Toast.makeText(this, "Invalid image file", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    binding.uploadImageButton.setError("Failed to load image");
+                    binding.uploadImageButton.setError("");
                     Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                binding.uploadImageButton.setError("No image selected");
+                binding.uploadImageButton.setError("");
                 Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void registerUser() {
+    private void register() {
         String username = binding.usernameEditText.getText().toString().trim();
         String password = binding.passwordEditText.getText().toString().trim();
         String confirmPassword = binding.confirmPasswordEditText.getText().toString().trim();
@@ -121,11 +127,14 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(username, password, displayName, base64ProfilePic);
         UserApi api = new UserApi();
 
-        api.registerUser(user, new Callback<Void>() {
+        api.register(user, new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
             @Override

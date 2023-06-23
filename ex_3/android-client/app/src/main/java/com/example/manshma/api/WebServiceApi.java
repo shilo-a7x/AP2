@@ -11,4 +11,7 @@ public interface WebServiceApi {
     @POST("/api/Users")
     Call<Void> register(@Body User user);
 
+    @POST("/api/Tokens")
+    Call<String> login(@Body User user);
+
 }
