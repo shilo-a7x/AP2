@@ -37,15 +37,10 @@ public class UserApi {
                     // Registration successful
                     callback.onResponse(call, response);
                 } else {
-                    int statusCode = response.code();
-                    if (statusCode == 409) {
-                        // Username already taken
-                        callback.onFailure(call, new Throwable("Username already taken"));
-                    } else {
-                        // Other failure case
-                        String errorBodyString = getErrorMsg(response.errorBody());
-                        callback.onFailure(call, new Throwable("Registration failed: " + errorBodyString));
-                    }
+                    // Other failure case
+                    String errorBodyString = getErrorMsg(response.errorBody());
+                    callback.onFailure(call, new Throwable("Registration failed: " + errorBodyString));
+
                 }
             }
 

@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                binding.usernameEditText.setOnClickListener(v -> binding.usernameEditText.setError("Wrong field"));
-                binding.passwordEditText.setOnClickListener(v -> binding.passwordEditText.setError("Wrong field"));
+                binding.usernameEditText.setError("Wrong field");
+                binding.passwordEditText.setError("Wrong field");
             }
         });
     }

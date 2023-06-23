@@ -7,9 +7,7 @@ exports.createUser = async (req, res) => {
         // Check if user already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res
-                .status(409)
-                .json({ message: "Username already exists." });
+            return res.status(409).json({ message: "Username already exists" });
         }
 
         // Create new user
@@ -46,7 +44,7 @@ exports.getUser = async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(404).json({ message: "User not found." });
+            return res.status(404).json({ message: "User not found" });
         }
         const { displayName, profilePic } = user;
         const filteredUser = { username, displayName, profilePic };
