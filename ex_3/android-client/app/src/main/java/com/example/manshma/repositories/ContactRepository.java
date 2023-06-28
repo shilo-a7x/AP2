@@ -20,31 +20,6 @@ public class ChatRepository {
     private ContactListData contactListData;
     private MessageListData messageListData;
 
-    class ContactListData extends MutableLiveData<List<Contact>> {
-        public ContactListData() {
-            super();
-            setValue(new LinkedList<>());
-        }
-
-        @Override
-        protected void onActive() {
-            super.onActive();
-            new Thread(() -> postValue(contactDao.getAllContacts()));
-        }
-    }
-    class MessageListData extends MutableLiveData<List<Message>> {
-        public MessageListData() {
-            super();
-            setValue(new LinkedList<>());
-        }
-
-        @Override
-        protected void onActive() {
-            super.onActive();
-            new Thread(() -> postValue(messageDao.getAllMessages()));
-        }
-    }
-
 
     public ChatRepository(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);
@@ -72,6 +47,39 @@ public class ChatRepository {
         }
         messageList.add(message);
         this.messageListData.setValue(messageList);
+    }
+
+    public MutableLiveData<List<Contact>> getContactListData() {
+        return contactListData;
+    }
+
+    public MutableLiveData<List<Message>> getMessageListData() {
+        return messageListData;
+    }
+
+    class ContactListData extends MutableLiveData<List<Contact>> {
+        public ContactListData() {
+            super();
+            setValue(new LinkedList<>());
+        }
+
+        @Override
+        protected void onActive() {
+            super.onActive();
+            new Thread(() -> postValue(contactDao.getAllContacts())).start();
+        }
+    }
+    class MessageListData extends MutableLiveData<List<Message>> {
+        public MessageListData() {
+            super();
+            setValue(new LinkedList<>());
+        }
+
+        @Override
+        protected void onActive() {
+            super.onActive();
+            new Thread(() -> postValue(messageDao.getAllMessages())).start();
+        }
     }
 
 

@@ -12,8 +12,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatApi {
-    private WebServiceApi api;
-    private AppPreferences preferences;
+    protected WebServiceApi api;
+    protected AppPreferences preferences;
 
     public ChatApi(Context context) {
         preferences = new AppPreferences(context);
