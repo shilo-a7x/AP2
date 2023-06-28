@@ -1,2 +1,4 @@
-package com.example.manshma.viewModels;public class MessageViewModel {
+package com.example.manshma.viewModels;
+
+public class MessageViewModel {
 }

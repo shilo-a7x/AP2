@@ -8,8 +8,9 @@ import androidx.room.RoomDatabase;
 
 import com.example.manshma.models.Contact;
 import com.example.manshma.models.Message;
+import com.example.manshma.models.User;
 
-@Database(entities = {Contact.class, Message.class}, version = 1)
+@Database(entities = {Contact.class, Message.class, User.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String APP_DATABASE_NAME = "app_database";
