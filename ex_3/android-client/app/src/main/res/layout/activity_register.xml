@@ -2,117 +2,128 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E8F1FF"
-    android:gravity="center">
-
-    <LinearLayout
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/bright_blue"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-        <!-- Username EditText -->
-        <EditText
-            android:id="@+id/usernameEditText"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E8F1FF"
+            android:gravity="center">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/username"
-            android:inputType="text"
-            android:maxLength="15"
-            android:padding="8dp"
-            tools:ignore="Autofill" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
-        <!-- Password EditText -->
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:maxLength="25"
-            android:padding="8dp"
-            tools:ignore="Autofill" />
+            <!-- Username EditText -->
+            <EditText
+                android:id="@+id/usernameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:maxLength="15"
+                android:padding="8dp"
+                tools:ignore="Autofill" />
 
-        <!-- Confirm Password EditText -->
-        <EditText
-            android:id="@+id/confirmPasswordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:maxLength="25"
-            android:padding="8dp"
-            tools:ignore="Autofill" />
+            <!-- Password EditText -->
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLength="25"
+                android:padding="8dp"
+                tools:ignore="Autofill" />
 
-        <!-- Display Name EditText -->
-        <EditText
-            android:id="@+id/displayNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/display_name"
-            android:inputType="text"
-            android:maxLength="15"
-            android:padding="8dp"
-            tools:ignore="Autofill" />
+            <!-- Confirm Password EditText -->
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:maxLength="25"
+                android:padding="8dp"
+                tools:ignore="Autofill" />
 
-        <!-- Upload Profile Picture Button -->
+            <!-- Display Name EditText -->
+            <EditText
+                android:id="@+id/displayNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/display_name"
+                android:inputType="text"
+                android:maxLength="15"
+                android:padding="8dp"
+                tools:ignore="Autofill" />
 
-        <Button
-            android:id="@+id/uploadImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/bright_blue"
-            android:drawableEnd="@drawable/ic_upload_icon"
-            android:drawableTint="@color/white"
-            android:text="@string/upload_profile_picture"
-            android:textColor="@color/white" />
+            <!-- Upload Profile Picture Button -->
 
-        <!-- Register Button -->
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/bright_blue"
-            android:text="@string/register_btn"
-            android:textColor="@color/white" />
+            <Button
+                android:id="@+id/uploadImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/bright_blue"
+                android:drawableEnd="@drawable/ic_upload_icon"
+                android:drawableTint="@color/white"
+                android:text="@string/upload_profile_picture"
+                android:textColor="@color/white" />
 
-        <!-- Login Prompt -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:text="@string/login_prompt" />
-        <!-- Login Prompt -->
-        <TextView
-            android:id="@+id/loginLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:text="@string/login_link"
-            android:textColor="@color/bright_blue" />
+            <!-- Register Button -->
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/bright_blue"
+                android:text="@string/register_btn"
+                android:textColor="@color/white" />
+
+            <!-- Login Prompt -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:text="@string/login_prompt" />
+            <!-- Login Prompt -->
+            <TextView
+                android:id="@+id/loginLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:text="@string/login_link"
+                android:textColor="@color/bright_blue" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

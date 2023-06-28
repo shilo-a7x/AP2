@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.manshma.R;
 import com.example.manshma.api.UserApi;
 import com.example.manshma.databinding.ActivityRegisterBinding;
 import com.example.manshma.models.User;
@@ -39,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        setSupportActionBar(binding.toolbar);
         setContentView(view);
 
         binding.usernameEditText.setOnClickListener(v -> binding.usernameEditText.setError(null));
@@ -125,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         User user = new User(username, password, displayName, base64ProfilePic);
-        UserApi api = new UserApi();
+        UserApi api = new UserApi(this);
 
         api.register(user, new Callback<Void>() {
             @Override
@@ -142,14 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-        // TODO
-        // Move to the next screen (e.g., ContactsActivity)
-//        Intent intent = new Intent(this, ContactsActivity.class);
-//        startActivity(intent);
-//        finish();
     }
 
     private boolean isValidPassword(String password) {
@@ -175,4 +171,26 @@ public class RegisterActivity extends AppCompatActivity {
         byte[] imageBytes = outputStream.toByteArray();
         return "data:image/jpeg;base64," + Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_logister, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            // Open the settings screen
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

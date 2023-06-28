@@ -1,8 +1,11 @@
 package com.example.manshma.api;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.example.manshma.models.User;
+import com.example.manshma.preferences.AppPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -16,13 +19,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserApi {
     private final WebServiceApi api;
+    private AppPreferences preferences;
 
-    public UserApi() {
+    public UserApi(Context context) {
+        preferences = new AppPreferences(context);
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000")
+                .baseUrl(preferences.getString(AppPreferences.KEY_SERVER_ADDRESS))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         this.api = retrofit.create(WebServiceApi.class);
@@ -71,6 +76,26 @@ public class UserApi {
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 // Registration request failed
                 callback.onFailure(call, new Throwable("Login failed: " + t.getMessage()));
+            }
+        });
+    }
+
+    public void getUser(String username, String token, Callback<User> callback) {
+        Call<User> call = api.getUser(username, token);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onResponse(call, Response.success(response.body()));
+                } else {
+                    String errorBodyString = getErrorMsg(response.errorBody());
+                    callback.onFailure(call, new Throwable("Cannot get user: " + errorBodyString));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                callback.onFailure(call, new Throwable("Cannot get user: " + t.getMessage()));
             }
         });
     }

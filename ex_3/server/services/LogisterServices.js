@@ -1,4 +1,5 @@
 const { User } = require("../models/User");
+const { decode, extractToken } = require("../tokens/JwtAuthenticator");
 
 exports.createUser = async (req, res) => {
     const { username, password, displayName, profilePic } = req.body;
@@ -19,7 +20,7 @@ exports.createUser = async (req, res) => {
         });
         await newUser.save();
 
-        res.status(200).send();
+        res.status(201).send();
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -41,6 +42,11 @@ exports.verifyUser = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     const { username } = req.params;
+    const token = extractToken(req);
+    const decodedToken = decode(token);
+    if (username !== decodedToken.username) {
+        return res.status(401).json({ message: "Unauthorized access" });
+    }
     try {
         const user = await User.findOne({ username });
         if (!user) {

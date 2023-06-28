@@ -19,4 +19,19 @@ public class User {
         this.displayName = displayName;
         this.profilePic = profilePic;
     }
+
+    public User(String username) {
+        this.username = username;
+        this.password = null;
+        this.displayName = null;
+        this.profilePic = null;
+    }
+
+    public User(String username, String displayName, String profilePic) {
+        this.username = username;
+        this.displayName = displayName;
+        this.profilePic = profilePic;
+        this.password = null;
+    }
+
 }

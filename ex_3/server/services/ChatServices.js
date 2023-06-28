@@ -50,10 +50,13 @@ exports.getContacts = async (req, res) => {
                     (user) => user !== username
                 );
                 const user = await User.findOne({ username: contactUser });
-                const lastMessage = await Message.findOne(
-                    { chatId: chat.id },
-                    { sender: 0 }
-                ).sort({ created: -1 });
+                let lastMessage = null;
+                const messages = await Message.find({ chatId: chat.id })
+                    .sort({ created: -1 })
+                    .limit(1);
+                if (messages.length > 0) {
+                    lastMessage = messages[0];
+                }
                 return { id: chat.id, user, lastMessage };
             })
         );
@@ -65,11 +68,14 @@ exports.getContacts = async (req, res) => {
 
 exports.getChat = async (req, res) => {
     const chatId = req.params.id;
+    const token = extractToken(req);
+    const decodedToken = decode(token);
+    const { username } = decodedToken;
 
     try {
         const chat = await Chat.findById(chatId);
-        if (!chat) {
-            return res.status(404).json({ message: "Chat not found" });
+        if (!chat || !chat.users.includes(username)) {
+            return res.status(403).json({ message: "Unauthorized access" });
         }
 
         const users = await User.find(
@@ -112,8 +118,8 @@ exports.createMessage = async (req, res) => {
     try {
         // Check is chat exist
         const chat = await Chat.findById(chatId);
-        if (!chat) {
-            return res.status(404).json({ message: "Chat not found" });
+        if (!chat || !chat.users.includes(username)) {
+            return res.status(403).json({ message: "Unauthorized access" });
         }
         // Create new message
         const newMessage = await Message.create({
@@ -130,7 +136,14 @@ exports.createMessage = async (req, res) => {
 
 exports.getMessages = async (req, res) => {
     const chatId = req.params.id;
+    const token = extractToken(req);
+    const decodedToken = decode(token);
+    const { username } = decodedToken;
     try {
+        const chat = await Chat.findById(chatId);
+        if (!chat || !chat.users.includes(username)) {
+            return res.status(403).json({ message: "Unauthorized access" });
+        }
         const messages = await Message.find(
             { chatId },
             { id: "$_id", _id: 0, content: 1, created: 1, sender: 1 }
@@ -146,13 +159,24 @@ exports.getMessages = async (req, res) => {
 
 exports.deleteChat = async (req, res) => {
     const chatId = req.params.id;
+    const token = extractToken(req);
+    const decodedToken = decode(token);
+    const { username } = decodedToken;
 
     try {
+        const chat = await Chat.findById(chatId);
+        if (!chat || !chat.users.includes(username)) {
+            return res.status(403).json({ message: "Unauthorized access" });
+        }
         // Delete the chat
-        const response = await Chat.deleteOne({ _id: chatId });
-        if (response.deletedCount === 0) {
+        const deleteChatResult = await Chat.deleteOne({ _id: chatId });
+
+        if (deleteChatResult.deletedCount === 0) {
             return res.status(404).json({ message: "Chat not found" });
         }
+
+        // Delete the associated messages
+        await Message.deleteMany({ chatId });
         res.status(200).json({ message: "Chat deleted" });
     } catch (error) {
         res.status(500).json({ message: error.message });
