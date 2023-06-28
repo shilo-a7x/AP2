@@ -1,5 +1,5 @@
 const { User } = require("../models/User");
-const jwt = require("jsonwebtoken");
+const { decode, extractToken } = require("../tokens/JwtAuthenticator");
 
 exports.createUser = async (req, res) => {
     const { username, password, displayName, profilePic } = req.body;
@@ -8,9 +8,7 @@ exports.createUser = async (req, res) => {
         // Check if user already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res
-                .status(400)
-                .json({ message: "Username already exists." });
+            return res.status(409).json({ message: "Username already exists" });
         }
 
         // Create new user
@@ -22,7 +20,7 @@ exports.createUser = async (req, res) => {
         });
         await newUser.save();
 
-        res.status(201).json(newUser);
+        res.status(201).send();
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -33,20 +31,10 @@ exports.verifyUser = async (req, res) => {
     try {
         const user = await User.findOne({ username, password });
         if (!user) {
-            return res
-                .status(400)
-                .json({ message: "Invalid username or password." });
+            return null;
         }
-        const token = jwt.sign(
-            { userId: user._id, username: user.username },
-            "hello",
-            {
-                expiresIn: "10000h",
-            }
-        ); // Replace 'secret' with your actual secret
-
-        jwt.decode(token); // userId
-        res.status(200).send(token);
+        const data = { userId: user._id, username: user.username };
+        return data;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -54,14 +42,19 @@ exports.verifyUser = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     const { username } = req.params;
-
+    const token = extractToken(req);
+    const decodedToken = decode(token);
+    if (username !== decodedToken.username) {
+        return res.status(401).json({ message: "Unauthorized access" });
+    }
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return res.status(404).json({ message: "User not found." });
+            return res.status(404).json({ message: "User not found" });
         }
-
-        res.status(200).json(user);
+        const { displayName, profilePic } = user;
+        const filteredUser = { username, displayName, profilePic };
+        res.status(200).json(filteredUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
