@@ -1,4 +1,4 @@
-# Ex2 web-api
+# Ex3 web-api
 
 ## Features
 
@@ -6,6 +6,7 @@
     -   User verification with JWT
     -   All data like users, chats and messages is stored using MongoDB
     -   Real time communication between and to clients
+    -   Supports Firebase Notification for android clients
 -   Brief of the api:
     -   Users:
         -   <kbd>GET</kbd> /api/Users/{username}
@@ -36,6 +37,7 @@ npm install
 -   `jsonwebtoken`
 -   `mongoose`
 -   `socket.io`
+-   `firebase`
 
 **_Installation of MongoDB is required!_**
 
