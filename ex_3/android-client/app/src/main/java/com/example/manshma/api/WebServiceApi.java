@@ -1,6 +1,11 @@
 package com.example.manshma.api;
 
+import com.example.manshma.models.Contact;
+import com.example.manshma.models.Message;
+import com.example.manshma.models.SendMessage;
 import com.example.manshma.models.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,4 +26,15 @@ public interface WebServiceApi {
     @GET("/api/Users/{username}")
     Call<User> getUser(@Path("username") String username, @Header("Authorization") String token);
 
+    @GET("/api/Chats")
+    Call<List<Contact>> getContacts();
+
+    @POST("/api/Chats")
+    Call<Contact> addContact(@Body User contact);
+
+    @GET("/api/Chats/{id}/Messages")
+    Call<List<Message>> getMessages(@Path("id") String chatId);
+
+    @GET("/api/Chats/{id}/Messages")
+    Call<Message> sendMessage(@Path("id") String chatId, SendMessage msg);
 }
